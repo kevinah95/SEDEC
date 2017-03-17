@@ -1,0 +1,19 @@
+{
+  "name": "sedec",
+  "version": "1.0.0",
+  "description": "Sistema Experto para Diagnóstico de Enfermedades en Cultivos",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinah95/SEDEC.git"
+  },
+  "author": "Kevin Hernandez Rostran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinah95/SEDEC/issues"
+  },
+  "homepage": "https://github.com/kevinah95/SEDEC#readme"
+}

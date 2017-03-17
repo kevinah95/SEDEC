@@ -1,0 +1,17 @@
+{
+  "name": "sedec",
+  "homepage": "https://github.com/kevinah95/SEDEC",
+  "authors": [
+    "Kevin Hernandez Rostran <kevinah95@gmail.com>"
+  ],
+  "description": "Sistema Experto para Diagnóstico de Enfermedades en Cultivos",
+  "main": "server.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
