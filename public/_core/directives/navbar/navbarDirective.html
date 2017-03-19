@@ -1,19 +1,19 @@
-<div class="ui inverted attached menu" ng-controller="navbarCtrl">
+<div class="ui inverted attached menu" ng-controller="navbarCtrl" style="background-color: #140E39">
+
     <div class="header item ">
         SEDEC
     </div>
-    <a class="item ">Inicio</a>
+    <a class="item " href="" ng-click="home()">Inicio</a>
     <a class="item ">Procesar</a>
     <a class="item ">Resultados</a>
     <a class="item ">Administración</a>
-    <div class="right menu ">
-        <a class="item ">Mi Perfil</a>
-        <div class="ui floating dropdown link item">
-            <input type="hidden" name="filters">
+    <div class="right menu">
+        <a class="item" href="" ng-click="profile()">Mi Perfil</a>
+        <div class="ui floating dropdown link item" id="notifications" ng-click="notifications()">
             <span class="text">Notificaciones</span>
             <i class="dropdown icon"></i>
             <div class="menu">
-                <div class="scrolling menu">
+                <div class="scrolling menu" style="background-color: #D9D9D9">
                     <div class="item">
                         <div class="ui feed">
                             <div class="event">
