@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/kevinah95/SEDEC/issues"
   },
-  "homepage": "https://github.com/kevinah95/SEDEC#readme"
+  "homepage": "https://github.com/kevinah95/SEDEC#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "method-override": "^2.3.7",
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0"
+  }
 }
