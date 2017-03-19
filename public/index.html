@@ -1,5 +1,39 @@
-<html>
-	<body>
-		<h1>SEDEC</h1>
-	</body>
+<!DOCTYPE html>
+<html ng-app="sedecApp" lang="es">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- Las 3 tags 'meta' de arriba son necesarias para el diseño web adaptable -->
+    <title>SEDEC</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/semantic/dist/semantic.min.js"></script>
+
+    <!-- Angular JS -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-css/angular-css.min.js"></script>
+
+    <!-- Other scripts -->
+
+    <!-- use the HTML5 History API [Angular] -->
+    <base href="/">
+
+</head>
+
+<body ng-view>
+
+    <script src="_core/app.js"></script>
+    <script src="_core/components/home/homeCtrl.js"></script>
+
+    <script>
+        $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+            options.async = true;
+        });
+    </script>
+</body>
+
 </html>

@@ -9,7 +9,7 @@ module.exports = function(pool) {
 
     router.get('/getUsers', function(req, res) {
         pool.getConnection(function(err, connection) {
-            connection.query('CALL getUsers()', function(err, rows) {
+            connection.query('CALL dummy_select()', function(err, rows) {
                 if (err) throw err;
                 res.send(rows[0]);
                 connection.release();

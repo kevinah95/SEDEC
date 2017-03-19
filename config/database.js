@@ -2,8 +2,8 @@
 module.exports = {
     'connection': {
         'host': 'localhost',
-        'user': 'root',
+        'user': 'sedec_web_client',
         'password': 'root',
-        'database': 'test-sedec'
+        'database': 'sedec'
     }
 };
