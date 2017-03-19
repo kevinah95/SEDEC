@@ -13,6 +13,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         css: '_core/components/profile/profile.css'
     });
 
+    $routeProvider.when('/login', {
+        templateUrl: '_core/components/login/loginView.html',
+        controller: 'loginCtrl',
+        css: '_core/components/login/login.css'
+    });
+
     $routeProvider.otherwise({
         redirectTo: '/home'
     });
