@@ -18,6 +18,7 @@
     "angular": "^1.6.3",
     "angular-route": "^1.6.3",
     "angular-css": "^1.0.8",
-    "semantic": "semantic-ui#^2.2.9"
+    "semantic": "semantic-ui#^2.2.9",
+    "ng-flow": "~2"
   }
 }

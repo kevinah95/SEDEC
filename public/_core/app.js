@@ -1,4 +1,4 @@
-var app = angular.module('sedecApp', ['ngRoute', 'angularCSS']);
+var app = angular.module('sedecApp', ['ngRoute', 'angularCSS', 'flow']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider.when('/home', {
@@ -24,6 +24,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: '_core/components/login/loginView.html',
         controller: 'loginCtrl',
         css: '_core/components/login/login.css'
+    });
+
+    $routeProvider.when('/upload', {
+        templateUrl: '_core/components/upload/uploadView.html',
+        controller: 'uploadCtrl',
+        css: '_core/components/upload/upload.css'
     });
 
     $routeProvider.otherwise({
