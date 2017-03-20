@@ -13,10 +13,16 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         css: '_core/components/profile/profile.css'
     });
 
+
     $routeProvider.when('/results', {
         templateUrl: '_core/components/results/resultsView.html',
         controller: 'resultsCtrl',
         css: '_core/components/results/results.css'
+
+    $routeProvider.when('/login', {
+        templateUrl: '_core/components/login/loginView.html',
+        controller: 'loginCtrl',
+        css: '_core/components/login/login.css'
     });
 
     $routeProvider.otherwise({
