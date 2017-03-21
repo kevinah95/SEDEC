@@ -13,11 +13,19 @@ module.exports = function(pool) {
 
     var router = express.Router();
 
-    router.get('/getUsers', function(req, res) {
+    router.post('/getUsers', function(req, res) {
         pool.getConnection(function(err, connection) {
-            connection.query('CALL check_user("kevinah95@gmail.com","123")', function(err, rows) {
+            connection.query('CALL check_user(?,?)', [req.body.mailp,req.body.passp],function(err, rows) {
                 if (err) throw err;
-                res.send(rows[0]);
+                if (!rows[0].length) {
+                    res.send(JSON.stringify({ "result": "invalid" }));
+                } else {
+                    
+                    
+                        
+                    
+                    res.send(rows[0]);
+                }
                 connection.release();
             });
         });

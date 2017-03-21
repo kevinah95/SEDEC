@@ -1,5 +1,5 @@
 var app = angular.module('sedecApp', ['ngRoute', 'angularCSS', 'flow']);
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider.when('/home', {
         templateUrl: '_core/components/home/homeView.html',
@@ -46,11 +46,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     $locationProvider.html5Mode(true);
 }]);
 
-app.run(function($rootScope, $route, $location, $window) {
+app.run(function ($rootScope, $route, $location, $window) {
     //Bind the `$locationChangeSuccess` event on the rootScope, so that we dont need to
     //bind in induvidual controllers.
 
-    $rootScope.$on('$locationChangeSuccess', function() {
+    $rootScope.$on('$locationChangeSuccess', function () {
         $rootScope.actualLocation = $location.path();
     });
 });

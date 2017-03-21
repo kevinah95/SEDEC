@@ -3,15 +3,15 @@
     <div class="ui middle aligned center aligned grid">
         <div class="ui basic center aligned segment">
             <h2 class="ui header">Perfil de Usuario</h2>
-            <img class="ui small centered bordered circular image" src="http://placehold.it/150x150">
-            <h3 class="ui header">Dr. Kevin Hernández Rostrán</h3>
-            <p><a>kevinah95@gmail.com</a></p>
-            <h4 class="ui header">Instituto Tecnológico de Costa Rica</h4>
+            <img class="ui small centered bordered circular image" ng-src="http://placehold.it/150x150">
+            <h3 class="ui header">{{user.userName}}</h3>
+            <p><a>{{user.userMail}}</a></p>
+            <h4 class="ui header">{{user.organizationName}}</h4>
         </div>
         <div class="row">
             <div class="column">
-                <button class="ui negative button">Cerrar Sesión</button>
-                <button class="ui primary button">Editar</button>
+                <button class="ui negative button" href="" ng-click="logout()">Cerrar Sesión</button>
+                <button class="ui primary button" href="" ng-click="editUser()">Editar</button>
             </div>
         </div>
     </div>

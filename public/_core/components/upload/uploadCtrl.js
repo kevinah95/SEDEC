@@ -1,4 +1,4 @@
-app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
+app.controller('uploadCtrl', function ($scope, $http, $timeout, $location) {
 
     $scope.errorUploading = false;
 
@@ -6,8 +6,8 @@ app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
         'uploadAnalysis': 'http://localhost:8080/api/users/uploadAnalysis',
         'getProcesses': 'http://localhost:8080/api/users/getProcesses'
     };
-    
-    $scope.cancelUpload = function(){
+
+    $scope.cancelUpload = function () {
         $location.path('/home').replace()
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -16,17 +16,17 @@ app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
 
     //Get the Id from the dropdown
     $scope.diseaseID = -1;
-    $scope.setDiseaseId = function(id) {
-        $scope.diseaseID = id;    
+    $scope.setDiseaseId = function (id) {
+        $scope.diseaseID = id;
     }
 
     $scope.imageStrings = [];
-    $scope.processFiles = function(files){
-        angular.forEach(files, function(flowFile, i){
-        var fileReader = new FileReader();
+    $scope.processFiles = function (files) {
+        angular.forEach(files, function (flowFile, i) {
+            var fileReader = new FileReader();
             fileReader.onload = function (event) {
                 var uri = event.target.result;
-                $scope.imageStrings[i] = uri;     
+                $scope.imageStrings[i] = uri;
             };
             fileReader.readAsDataURL(flowFile.file);
         });
@@ -37,36 +37,36 @@ app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
     $scope.analysisArray = {};
     //Modal
     var modal = document.getElementById('myModal');
-    $scope.openModal = function() {
+    $scope.openModal = function () {
         modal.style.display = "block";
-        
+
         var form = $('.form');
         var allFields = form.form('get values');
         var uploadedImage = $scope.imageStrings[0];
-        $scope.analysisArray = 
-        {
-            "userId": 1, //Should be sessionStorage
-            "processId": $scope.diseaseID,
-            "description": allFields.description,
-            "image": uploadedImage
-        };
+        $scope.analysisArray =
+            {
+                "userId": 1, //Should be sessionStorage
+                "processId": $scope.diseaseID,
+                "description": allFields.description,
+                "image": uploadedImage
+            };
 
         console.log($scope.analysisArray);
         //Upload Image
         $('.ui.large.submit.button')
-        .api({
+            .api({
                 action: 'uploadAnalysis',
                 method: 'POST',
-                data:($scope.analysisArray),
-                onResponse: function(response) {
+                data: ($scope.analysisArray),
+                onResponse: function (response) {
                     console.log(response);
-                    if(response.result == "valid"){
-                                            $location.path('/home').replace()
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                    }else{
-    $scope.errorUploading = true;
+                    if (response.result == "valid") {
+                        $location.path('/home').replace()
+                        if (!$scope.$$phase) {
+                            $scope.$apply();
+                        }
+                    } else {
+                        $scope.errorUploading = true;
                     }
                     return response;
                 }
@@ -75,7 +75,7 @@ app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
         ;
     }
 
-    $scope.closeModal = function() {
+    $scope.closeModal = function () {
         modal.style.display = "none";
     }
 
@@ -83,16 +83,18 @@ app.controller('uploadCtrl', function($scope, $http, $timeout, $location) {
     var info = { "Id": 1 }; //This line must be changed when we have SessionStorage
     $scope.processesList = {};
 
-    $('.ui.dropdown').dropdown()        
-    .api({
+    $('.ui.dropdown').dropdown()
+        .api({
             action: 'getProcesses',
             method: 'POST',
             data: info,
-            onResponse: function(response) {
+            on: 'mouseenter',
+            onResponse: function (response) {
                 $scope.processesList = response;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
+                console.log(response)
                 return response;
             }
         });

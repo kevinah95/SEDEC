@@ -12,6 +12,18 @@ app.factory('ResultService', function($rootScope, $q, $log, $http) {
 
                 });
             return deferred.promise;
+        },
+        checkUser: function(model) {
+            var deferred = $q.defer();
+
+            $http.post('/api/users/getUsers', model)
+                .then(function(data) {
+                    deferred.resolve(data);
+                    //console.log(data);
+                    //sessionStorage.restaurant = JSON.stringify(data);
+
+                });
+            return deferred.promise;
         }
     };
 });
