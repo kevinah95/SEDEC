@@ -32,6 +32,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         css: '_core/components/upload/upload.css'
     });
 
+    $routeProvider.when('/editUser', {
+        templateUrl: '_core/components/editUser/editUserView.html',
+        controller: 'editUserCtrl',
+        css: '_core/components/editUser/editUser.css'
+    });
+
     $routeProvider.otherwise({
         redirectTo: '/home'
     });
