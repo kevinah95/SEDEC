@@ -2,7 +2,7 @@
 <div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
     <div class="ui middle aligned center aligned grid">
         <div class="ui basic center aligned segment">
-            <div flow-init="{target:'/uploader', maxChunkRetries: 1, singleFile: true}">
+            <div flow-init="{target:'/uploader', maxChunkRetries: 1, singleFile: true}" flow-name="uploader.flow" flow-files-added="processFiles($files)">
                 <form class="ui form">
                     <div class="ui centered grid">
                         <div class="row">
@@ -14,7 +14,8 @@
                         </div>
                         <div class="row">
                             <div class="field">
-                                <img flow-btn flow-attrs="{accept:'image/*'}" flow-img="$flow.files[0]" class="ui small centered image" name="uploadedImage" src="_core/components/upload/assets/img/uploadImg.png">
+                                <img ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" class="ui centered image" name="defaultImage" src="_core/components/upload/assets/img/uploadImg.png">
+                                <img ng-show="$flow.files.length" flow-img="$flow.files[0]" class="ui medium centered image" name="uploadedImage">
                                 <br></br>
                                 <span class="ui small button" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" style="background-color: #034A91; color: #FFFFFF">Cambiar imagen</span>
                             </div>
@@ -27,7 +28,7 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Seleccione la enfermedad</div>
                                     <div class="menu">
-                                        <div class="item">La del gallillo</div> <!--ng-repeat="especie in especies"--> <!-- {{especie.ESPECIE}} -->
+                                        <div class="item" ng-repeat="process in processesList" ng-click="setDiseaseId(process.processId)">{{process.processName}}</div> <!--ng-repeat="especie in especies"--> <!-- {{especie.ESPECIE}} -->
                                     </div>
                                 </div>
                             </div>
@@ -35,12 +36,12 @@
                         <div class="row">
                             <div class="field">
                                 <label>Descripción</label>
-                                <textarea placeholder="Descripción..."></textarea>
+                                <textarea name="description" placeholder="Descripción..."></textarea>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="ui large submit button" style="background-color: #034A91; color: #FFFFFF">Enviar</div>
-                            <div class="ui large button" style="background-color: #C1272D; color: #FFFFFF">Cancelar</div>
+                            <div ng-click="openModal()" class="ui large button" style="background-color: #034A91; color: #FFFFFF">Enviar</div>
+                            <div ng-click="cancelUpload()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">Cancelar</div>
                         </div>
                         <div class="ui error message"></div>
                     </div>
@@ -48,4 +49,27 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-body">
+        <h3 class="ui centered header">
+            <div class="content">
+                Confirmar envío de datos
+            </div>
+        </h3>
+        <h3 ng-show="errorUploading" class="ui centered red header">
+            <div class="content">
+                Ocurrió un error con la consulta
+            </div>
+        </h3>
+        <div class="ui centered grid">
+            <div class="row">
+                <div class="ui large submit button" style="background-color: #034A91; color: #FFFFFF">Sí</div>
+                <div ng-click="closeModal()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">No</div>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>

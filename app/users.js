@@ -3,8 +3,14 @@ var express = require('express')
 var Busboy = require('busboy'), //
     inspect = require('util').inspect;
 
+var multer = require('multer')
+var upload = multer({
+    dest: 'uploads/'
+})
+
 module.exports = function(pool) {
     'use strict';
+
     var router = express.Router();
 
     router.get('/getUsers', function(req, res) {
@@ -71,5 +77,32 @@ module.exports = function(pool) {
         }).join('');
         return binstr;
     }
+    router.post('/getProcesses', function(req, res) {
+        pool.getConnection(function(err, connection) {
+            connection.query('CALL get_user_processes(?)',[req.body.Id], function(err, rows) {
+                if (err) throw err;
+                res.send(rows[0]);
+                connection.release();
+            });
+        });
+    });
+
+    router.post('/uploadAnalysis', upload.single('avatar'), function(req, res) {
+        console.log("????????")
+        console.log(req.body)
+        pool.getConnection(function(err, connection) {
+            connection.query('CALL create_analysis(?,?,?,?)',[req.body.userId, req.body.processId, req.body.description,req.body.image], function(err, rows) {
+                if (err) throw err;
+                console.log(rows.affectedRows)
+               if (rows.affectedRows == 0) {
+                    res.send(JSON.stringify({ "result": "invalid" }));
+                }else{
+                    res.send(JSON.stringify({ "result": "valid" }));
+                }
+                connection.release();
+            });
+        });
+    });
+
     return router;
 };
