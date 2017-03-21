@@ -27,7 +27,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     });
 
     $routeProvider.otherwise({
-        redirectTo: '/home'
+        redirectTo: '/login'
     });
 
     // use the HTML5 History API
