@@ -20,7 +20,9 @@ module.exports = function(pool) {
                 if (!rows[0].length) {
                     res.send(JSON.stringify({ "result": "invalid" }));
                 } else {
-                    
+                    var bufferBase64 = "data:image/gif;base64," + new Buffer(rows[0][0].userProfilePicture, 'binary').toString('base64');
+                        rows[0][0].userProfilePicture = bufferBase64;
+                    console.log(rows[0][0].userProfilePicture);
                     
                         
                     
