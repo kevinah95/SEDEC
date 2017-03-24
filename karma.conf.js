@@ -2,7 +2,7 @@
 // Generated on Thu Mar 23 2017 07:43:18 GMT-0600 (Central America Standard Time)
 
 module.exports = function(config) {
-    config.set({
+    var configuration = {
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
@@ -61,27 +61,7 @@ module.exports = function(config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome', 'PhantomJS', 'PhantomJS_custom'],
-
-        // you can define custom flags
-        customLaunchers: {
-            'PhantomJS_custom': {
-                base: 'PhantomJS',
-                options: {
-                    windowName: 'my-window',
-                    settings: {
-                        webSecurityEnabled: false
-                    },
-                },
-                flags: ['--load-images=true'],
-                debug: true
-            }
-        },
-
-        phantomjsLauncher: {
-            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-            exitOnResourceError: true
-        },
+        browsers: ['Chrome'],
 
 
         // Continuous Integration mode
@@ -91,5 +71,10 @@ module.exports = function(config) {
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity
-    })
+    };
+
+    if (process.env.TRAVIS) {
+        configuration.browsers = ['Firefox'];
+    };
+    config.set(configuration);
 }
