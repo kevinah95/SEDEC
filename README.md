@@ -5,7 +5,6 @@ Sistema Experto para Diagnóstico de Enfermedades en Cultivos
 ### Requisitos previos
 Para ejecutar las pruebas:
   - Instalar karma-cli: **`npm install -g karma-cli`**
-  - Agregar PhantomJS al PATH: **`setx path "%PATH%;C:\phantomjs\bin"`**
 
 
 Para correr el server:
@@ -23,7 +22,7 @@ Para correr el server:
   7. Ingrese a la dirección: **`http://localhost:8081`**
 ### Pruebas
 
-  - Corra: **`karma start --browsers PhantomJS_custom`**
+  - Corra: **`karma start --browsers Chrome`**
 
 ## Contribuir
 Ver nuestro archivo [CONTRIBUTING.md](https://github.com/kevinah95/SEDEC/blob/master/CONTRIBUTING.md) para mayor detalle. Reportar los errores encontrados a través de Issues.
