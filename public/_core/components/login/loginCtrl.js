@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $http, $timeout, $location) {
+app.controller('loginCtrl', function ($scope, $http, $timeout, $location) {
 
     //When login fails, this becomes true 
     $scope.NotRegistered = false;
@@ -23,7 +23,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $location) {
             serializeForm: true,
             method: 'POST',
             data: $(this).serialize(),
-            onResponse: function(response) {
+            onResponse: function (response) {
                 if (response.result == "invalid") {
                     $scope.NotRegistered = true;
                     if (!$scope.$$phase) {

@@ -1,7 +1,7 @@
 app.controller('profileCtrl', function ($scope, $timeout, $location, ResultService) {
     var info = {
-        mailp: "jmaq.cr@gmail.com",
-        passp: "pathfinder"
+        mailp: "jasc@gmail.com",
+        passp: "12345"
     }
 
     $scope.logout = function () {
@@ -21,7 +21,7 @@ app.controller('profileCtrl', function ($scope, $timeout, $location, ResultServi
         console.log('$$postDigest executed. Digest completed');
 
         ResultService.checkUser(info).then(function (res) {
-            console.log(res.data)
+            console.log(res.data[0].userProfilePicture)
             $scope.user = res.data[0]
 
         }, function () {

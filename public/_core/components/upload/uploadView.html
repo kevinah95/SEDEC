@@ -14,7 +14,8 @@
                         </div>
                         <div class="row">
                             <div class="field">
-                                <img ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" class="ui centered image" name="defaultImage" src="_core/components/upload/assets/img/uploadImg.png">
+                                <img ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" class="ui centered image" name="defaultImage"
+                                    src="_core/components/upload/assets/img/uploadImg.png">
                                 <img ng-show="$flow.files.length" flow-img="$flow.files[0]" class="ui medium centered image" name="uploadedImage">
                                 <br></br>
                                 <span class="ui small button" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" style="background-color: #034A91; color: #FFFFFF">Cambiar imagen</span>
@@ -28,7 +29,7 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Seleccione la enfermedad</div>
                                     <div class="menu">
-                                        <div class="item" ng-repeat="process in processesList" ng-click="setDiseaseId(process.processId)">{{process.processName}}</div> <!--ng-repeat="especie in especies"--> <!-- {{especie.ESPECIE}} -->
+                                        <div class="item" ng-repeat="process in processesList" ng-click="setDiseaseId(process.processId)">{{process.processName}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -52,24 +53,24 @@
 </div>
 
 <div id="myModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-body">
-        <h3 class="ui centered header">
-            <div class="content">
-                Confirmar envío de datos
-            </div>
-        </h3>
-        <h3 ng-show="errorUploading" class="ui centered red header">
-            <div class="content">
-                Ocurrió un error con la consulta
-            </div>
-        </h3>
-        <div class="ui centered grid">
-            <div class="row">
-                <div class="ui large submit button" style="background-color: #034A91; color: #FFFFFF">Sí</div>
-                <div ng-click="closeModal()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">No</div>
+    <div class="modal-content">
+        <div class="modal-body">
+            <h3 class="ui centered header">
+                <div class="content">
+                    Confirmar envío de datos
+                </div>
+            </h3>
+            <h3 ng-show="errorUploading" class="ui centered red header">
+                <div class="content">
+                    Ocurrió un error con la consulta
+                </div>
+            </h3>
+            <div class="ui centered grid">
+                <div class="row">
+                    <div class="ui large submit button" style="background-color: #034A91; color: #FFFFFF">Sí</div>
+                    <div ng-click="closeModal()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">No</div>
+                </div>
             </div>
         </div>
     </div>
-  </div>
 </div>
