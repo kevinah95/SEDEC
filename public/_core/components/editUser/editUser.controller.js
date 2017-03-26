@@ -4,8 +4,6 @@
         .module('sedecApp')
         .controller('EditUserController', EditUserController);
 
-    EditUserController.$inject = ['$scope', '$timeout', '$location'];
-
     function EditUserController($scope, $timeout, $location) {
 
         $.fn.api.settings.api = {

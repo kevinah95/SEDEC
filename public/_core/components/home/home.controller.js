@@ -2,7 +2,9 @@
     'use strict';
     angular
         .module('sedecApp')
-        .controller('homeCtrl', function($scope, $timeout, $location) {
-            this.message = "Hello";
-        });
+        .controller('HomeController', HomeController);
+
+    function HomeController($scope, $timeout, $location) {
+        this.message = "Hello";
+    }
 })();

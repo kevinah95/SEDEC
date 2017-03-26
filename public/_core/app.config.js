@@ -9,32 +9,34 @@
 
         $routeProvider.when('/home', {
             templateUrl: '_core/components/home/homeView.html',
-            controller: 'homeCtrl',
+            controller: 'HomeController',
             css: '_core/components/home/home.css'
         });
 
         $routeProvider.when('/profile', {
             templateUrl: '_core/components/profile/profileView.html',
-            controller: 'profileCtrl',
-            css: '_core/components/profile/profile.css'
+            controller: 'ProfileController',
+            controllerAs: 'vm',
+            css: '_core/components/profile/profile.style.css'
         });
 
 
         $routeProvider.when('/results', {
             templateUrl: '_core/components/results/resultsView.html',
-            controller: 'resultsCtrl',
+            controller: 'ResultsController',
+            controllerAs: 'vm',
             css: '_core/components/results/results.css'
         });
 
         $routeProvider.when('/login', {
             templateUrl: '_core/components/login/loginView.html',
-            controller: 'loginCtrl',
+            controller: 'LoginController',
             css: '_core/components/login/login.css'
         });
 
         $routeProvider.when('/upload', {
             templateUrl: '_core/components/upload/uploadView.html',
-            controller: 'uploadCtrl',
+            controller: 'UploadController',
             css: '_core/components/upload/upload.css'
         });
 

@@ -2,33 +2,28 @@
     'use strict';
     angular
         .module('sedecApp')
-        .factory('ResultService', function($rootScope, $q, $log, $http) {
-            var currentRestaurant = undefined;
-            return {
-                searchRest: function(model) {
-                    var deferred = $q.defer();
+        .factory('resultService', resultService);
 
-                    $http.post('/api/users/getResults', model)
-                        .then(function(data) {
-                            deferred.resolve(data);
-                            //console.log(data);
-                            //sessionStorage.restaurant = JSON.stringify(data);
+    function resultService($rootScope, $q, $log, $http) {
+        var service = {
+            getResults: getResults
+        };
+        return service;
 
-                        });
-                    return deferred.promise;
-                },
-                checkUser: function(model) {
-                    var deferred = $q.defer();
+        function getResults(model) {
+            return $http.post('/api/results/getResults', model)
+                .then(getResultsComplete)
+                .catch(getResultsFailed);
 
-                    $http.post('/api/users/getUsers', model)
-                        .then(function(data) {
-                            deferred.resolve(data);
-                            //console.log(data);
-                            //sessionStorage.restaurant = JSON.stringify(data);
+            function getResultsComplete(res, status, headers, config) {
+                return res.data;
+            }
 
-                        });
-                    return deferred.promise;
-                }
-            };
-        });
+            function getResultsFailed(e) {
+                console.error(e.data.message);
+                return $q.reject(e);
+            }
+
+        }
+    }
 })();

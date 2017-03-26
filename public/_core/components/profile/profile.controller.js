@@ -2,35 +2,45 @@
     'use strict';
     angular
         .module('sedecApp')
-        .controller('profileCtrl', function($scope, $timeout, $location, ResultService) {
-            var info = {
-                mailp: "jasc@gmail.com",
-                passp: "12345"
+        .controller('ProfileController', ProfileController);
+
+    function ProfileController($scope, $timeout, $location, profileService) {
+        var vm = this;
+        vm.results = {};
+        vm.userInfo = {
+            mailp: "kevinah95@gmail.com",
+            passp: "123"
+        };
+        $scope.logout = function() {
+            $location.path('/login').replace()
+            if (!$scope.$$phase) {
+                $scope.$apply();
             }
+        };
+        $scope.editUser = function() {
+            $location.path('/editUser').replace()
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        };
 
-            $scope.logout = function() {
-                $location.path('/login').replace()
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
-            $scope.editUser = function() {
-                $location.path('/editUser').replace()
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
-
-            $scope.$$postDigest(function() {
-                console.log('$$postDigest executed. Digest completed');
-
-                ResultService.checkUser(info).then(function(res) {
-                    console.log(res.data[0].userProfilePicture)
-                    $scope.user = res.data[0]
-
-                }, function() {
-                    console.log("FAILED")
-                });
-            });
+        $scope.$$postDigest(function() {
+            console.log('$$postDigest executed. Digest completed');
+            activate(vm.userInfo);
         });
+
+        function activate(info) {
+            return profileService.checkUser(info)
+                .then(function(data) {
+                    vm.user = data
+                    return vm.user;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return error;
+                });
+        };
+
+
+    }
 })();
