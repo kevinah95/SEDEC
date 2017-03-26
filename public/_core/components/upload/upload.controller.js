@@ -21,7 +21,7 @@
 
         $.fn.api.settings.api = {
             'uploadAnalysis': 'http://localhost:8080/api/analysis/uploadAnalysis',
-            'getProcesses': 'http://localhost:8080/api/users/getProcesses'
+            'getProcesses': 'http://localhost:8080/api/processes/getProcesses'
         };
 
         function cancelUpload() {
@@ -101,7 +101,7 @@
                 data: info,
                 on: 'mouseenter',
                 onResponse: function(response) {
-                    $scope.processesList = response;
+                    vm.processesList = response;
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
