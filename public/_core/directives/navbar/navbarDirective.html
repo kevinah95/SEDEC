@@ -1,15 +1,15 @@
-<div class="ui inverted attached menu" ng-controller="NavbarController" style="background-color: #140E39">
+<div class="ui inverted attached menu" style="background-color: #140E39">
 
     <div class="header item ">
         SEDEC
     </div>
-    <a class="item " href="" ng-click="home()">Inicio</a>
-    <a class="item " href="" ng-click="upload()">Procesar</a>
-    <a class="item " href="" ng-click="results()">Resultados</a>
+    <a class="item " href="" ng-click="navbar.home()">Inicio</a>
+    <a class="item " href="" ng-click="navbar.upload()">Procesar</a>
+    <a class="item " href="" ng-click="navbar.results()">Resultados</a>
     <a class="item ">Administración</a>
     <div class="right menu">
-        <a class="item" href="" ng-click="profile()">Mi Perfil</a>
-        <div class="ui floating dropdown link item" id="notifications" ng-click="notifications()">
+        <a class="item" href="" ng-click="navbar.profile()">Mi Perfil</a>
+        <div class="ui floating dropdown link item" id="notifications" ng-click="navbar.notifications()">
             <span class="text">Notificaciones</span>
             <i class="dropdown icon"></i>
             <div class="menu">

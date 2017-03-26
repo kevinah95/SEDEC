@@ -6,7 +6,9 @@
             return {
                 templateUrl: '_core/directives/navbar/navbarDirective.html',
                 transclude: true,
-                replace: true
+                replace: true,
+                controller: 'NavbarController',
+                controllerAs: 'navbar'
             };
         });
 })();

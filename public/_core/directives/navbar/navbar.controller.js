@@ -4,33 +4,42 @@
         .module('sedecApp')
         .controller('NavbarController', NavbarController);
 
-    function NavbarController($scope, $timeout, $location, $route) {
+    function NavbarController($scope, $location) {
+        var navbar = this;
+        navbar.home = home;
+        navbar.profile = profile;
+        navbar.results = results;
+        navbar.upload = upload;
 
-
-        $scope.home = function() {
+        function home() {
             $location.path('/home').replace();
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         };
-        $scope.profile = function() {
+
+        function profile() {
             $location.path('/profile');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         };
-        $scope.results = function() {
+
+        function results() {
             $location.path('/results');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         };
-        $scope.upload = function() {
+
+        function upload() {
             $location.path('/upload');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         };
+
+
 
         $(function() {
             $(document).ready(function() {

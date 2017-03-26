@@ -19,7 +19,8 @@
         function activate(info) {
             return resultService.getResults(info)
                 .then(function(data) {
-                    vm.results = data
+                    console.log(data);
+                    vm.results = data;
                     return vm.results;
                 })
                 .catch(function(error) {
