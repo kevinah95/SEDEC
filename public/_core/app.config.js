@@ -37,12 +37,14 @@
         $routeProvider.when('/upload', {
             templateUrl: '_core/components/upload/uploadView.html',
             controller: 'UploadController',
+            controllerAs: 'vm',
             css: '_core/components/upload/upload.css'
         });
 
         $routeProvider.when('/editUser', {
             templateUrl: '_core/components/editUser/editUserView.html',
             controller: 'EditUserController',
+            controllerAs: 'vm',
             css: '_core/components/editUser/editUser.css'
         });
 

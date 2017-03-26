@@ -5,64 +5,73 @@
         .controller('UploadController', UploadController);
 
     function UploadController($scope, $http, $timeout, $location) {
-
-        $scope.errorUploading = false;
+        var modal = document.getElementById('myModal');
+        var info = { "Id": 1 }; //This line must be changed when we have SessionStorage
+        var vm = this;
+        vm.errorUploading = false;
+        vm.diseaseID = -1;
+        vm.imageStrings = [];
+        vm.analysisArray = {};
+        vm.processesList = {};
+        vm.cancelUpload = cancelUpload;
+        vm.setDiseaseId = setDiseaseId;
+        vm.processFiles = processFiles;
+        vm.openModal = openModal;
+        vm.closeModal = closeModal;
 
         $.fn.api.settings.api = {
             'uploadAnalysis': 'http://localhost:8080/api/analysis/uploadAnalysis',
             'getProcesses': 'http://localhost:8080/api/users/getProcesses'
         };
 
-        $scope.cancelUpload = function() {
-            $location.path('/home').replace()
+        function cancelUpload() {
+            $location.path('/home')
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
         }
 
-        //Get the Id from the dropdown
-        $scope.diseaseID = -1;
-        $scope.setDiseaseId = function(id) {
-            $scope.diseaseID = id;
+        //Get the Id from the dropdown        
+        function setDiseaseId(id) {
+            vm.diseaseID = id;
         }
 
-        $scope.imageStrings = [];
-        $scope.processFiles = function(files) {
+
+
+        function processFiles(files) {
             angular.forEach(files, function(flowFile, i) {
                 var fileReader = new FileReader();
                 fileReader.onload = function(event) {
                     var uri = event.target.result;
-                    $scope.imageStrings[i] = uri;
+                    vm.imageStrings[i] = uri;
                 };
                 fileReader.readAsDataURL(flowFile.file);
             });
         };
 
 
-        //Array with all the info needed for the uploadAnalysis
-        $scope.analysisArray = {};
-        //Modal
-        var modal = document.getElementById('myModal');
-        $scope.openModal = function() {
+
+
+        function openModal() {
             modal.style.display = "block";
 
             var form = $('.form');
             var allFields = form.form('get values');
-            var uploadedImage = $scope.imageStrings[0];
-            $scope.analysisArray = {
+            var uploadedImage = vm.imageStrings[0];
+            vm.analysisArray = {
                 "userId": 1, //Should be sessionStorage
-                "processId": $scope.diseaseID,
+                "processId": vm.diseaseID,
                 "description": allFields.description,
                 "image": uploadedImage
             };
 
-            console.log($scope.analysisArray);
+            console.log(vm.analysisArray);
             //Upload Image
             $('.ui.large.submit.button')
                 .api({
                     action: 'uploadAnalysis',
                     method: 'POST',
-                    data: ($scope.analysisArray),
+                    data: (vm.analysisArray),
                     onResponse: function(response) {
                         console.log(response);
                         if (response.result == "valid") {
@@ -71,7 +80,7 @@
                                 $scope.$apply();
                             }
                         } else {
-                            $scope.errorUploading = true;
+                            vm.errorUploading = true;
                         }
                         return response;
                     }
@@ -79,13 +88,11 @@
                 });;
         }
 
-        $scope.closeModal = function() {
+        function closeModal() {
             modal.style.display = "none";
         }
 
-        //Dropdown fill
-        var info = { "Id": 1 }; //This line must be changed when we have SessionStorage
-        $scope.processesList = {};
+
 
         $('.ui.dropdown').dropdown()
             .api({

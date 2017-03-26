@@ -4,7 +4,7 @@
         .module('sedecApp')
         .factory('resultsService', resultsService);
 
-    function resultsService($rootScope, $q, $log, $http) {
+    function resultsService($q, $http) {
         var service = {
             getResults: getResults
         };
@@ -20,7 +20,7 @@
             }
 
             function getResultsFailed(e) {
-                console.error(e.data.message);
+                //console.error(e.data.message);
                 return $q.reject(e);
             }
 

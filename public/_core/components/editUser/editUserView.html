@@ -14,7 +14,7 @@
                         </div>
                         <div class="row">
                             <div class="field">
-                                <img flow-btn flow-attrs="{accept:'image/*'}" flow-img="$flow.files[0]" class="ui small centered image" name="uploadedImage" src="_core/components/upload/assets/img/uploadImg.png" ng-model="pic">
+                                <img flow-btn flow-attrs="{accept:'image/*'}" flow-img="$flow.files[0]" class="ui small centered image" name="uploadedImage" src="_core/components/upload/assets/img/uploadImg.png" ng-model="vm.pic">
                                 <br></br>
                                 <span class="ui small button" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" style="background-color: #034A91; color: #FFFFFF">Cambiar imagen</span>
                                 <!--<input id="image_uploaded" ng-show="false" type="text" name="image_uploaded">-->
@@ -22,25 +22,25 @@
                         </div>
                         <div class="row">
                             <div class="field">
-                                <label>Correo Electrónica</label>
-                                <input type="text" name="mail" placeholder="usuario@mail.com" ng-model="mail">
+                                <label>Correo Electrónico</label>
+                                <input type="text" name="mail" placeholder="usuario@mail.com" ng-model="vm.mail">
                             </div>
                         </div>
                         <div class="row">
                             <div class="field">
                                 <label>Contraseña</label>
-                                <input type="password" name="pass" placeholder="********" ng-model="pass">
+                                <input type="password" name="pass" placeholder="********" ng-model="vm.pass">
                             </div>
                         </div>
                         <div class="row">
                             <div class="field">
                                 <label>Nombre</label>
-                                <input type="text" name="name" placeholder="Jose Aguilar" ng-model="name">
+                                <input type="text" name="name" placeholder="Jose Aguilar" ng-model="vm.name">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="ui large button" ng-click="submitForm()" style="background-color: #034A91; color: #FFFFFF" ng-click="getData()">Guardar</div>
-                            <div class="ui large button" ng-click="cancelEdit()" style="background-color: #C1272D; color: #FFFFFF">Cancelar</div>
+                            <div class="ui large button" ng-click="vm.submitForm()" style="background-color: #034A91; color: #FFFFFF" ng-click="vm.getData()">Guardar</div>
+                            <div class="ui large button" ng-click="vm.cancelEdit()" style="background-color: #C1272D; color: #FFFFFF">Cancelar</div>
                         </div>
                         <div class="ui error message"></div>
                     </div>
@@ -66,7 +66,7 @@
             <div class="ui centered grid">
                 <div class="row">
                     <div class="ui large submit button" style="background-color: #034A91; color: #FFFFFF">Sí</div>
-                    <div ng-click="closeModal()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">No</div>
+                    <div ng-click="vm.closeModal()" class="ui large button" style="background-color: #C1272D; color: #FFFFFF">No</div>
                 </div>
             </div>
         </div>

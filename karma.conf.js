@@ -17,6 +17,7 @@ module.exports = function(config) {
         files: [
             './public/bower_components/jquery/dist/jquery.js',
             './public/bower_components/semantic/dist/semantic.js',
+            './public/bower_components/semantic/dist/semantic.css',
             './public/bower_components/angular/angular.js',
             './public/bower_components/angular-route/angular-route.js',
             './public/bower_components/angular-mocks/angular-mocks.js', // loads our modules for tests
@@ -42,7 +43,7 @@ module.exports = function(config) {
 
 
         // test results reporter to use
-        // possible values: 'dots', 'progress'
+        // possible values: 'dots', 'progress', 'spec'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['spec'],
 

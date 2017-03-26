@@ -4,36 +4,46 @@
         .module('sedecApp')
         .controller('EditUserController', EditUserController);
 
-    function EditUserController($scope, $timeout, $location) {
+    function EditUserController($scope, $location) {
+
+        var vm = this;
+        vm.imageStrings = [];
+        vm.errorUploading = false;
+        vm.editionDataArray = {};
+        vm.submitForm = submitForm;
+        vm.closeModal = closeModal;
+        vm.cancelEdit = cancelEdit;
+
+        var modal = document.getElementById('myModal');
 
         $.fn.api.settings.api = {
             'editUser': 'http://localhost:8080/api/users/editUser'
         };
 
-        $scope.imageStrings = [];
         $scope.$on('flow::filesAdded', function(event, $flow, files) {
             // document.getElementById("image_uploaded").value = "Not Empty";
             angular.forEach(files, function(flowFile, i) {
                 var fileReader = new FileReader();
                 fileReader.onload = function(event) {
                     var uri = event.target.result;
-                    $scope.imageStrings[i] = uri;
+                    vm.imageStrings[i] = uri;
                 };
                 fileReader.readAsDataURL(flowFile.file);
             });
         });
 
-        $scope.errorUploading = false;
-        $scope.editionDataArray = {};
-        var modal = document.getElementById('myModal');
-        $scope.submitForm = function() {
+
+
+
+
+        function submitForm() {
             var valid = $('.ui.form').form('validate form');
             if (valid) {
                 modal.style.display = "block";
                 var form = $('.form');
                 var allFields = form.form('get values');
-                var uploadedImage = $scope.imageStrings[0];
-                $scope.editionDataArray = {
+                var uploadedImage = vm.imageStrings[0];
+                vm.editionDataArray = {
                     "userId": 1, //Should be sessionStorage
                     "mail": allFields.mail,
                     "password": allFields.pass,
@@ -41,21 +51,21 @@
                     "image": uploadedImage
                 };
 
-                console.log($scope.editionDataArray.image);
+                console.log(vm.editionDataArray.image);
                 $('.ui.large.submit.button')
                     .api({
                         action: 'editUser',
                         method: 'POST',
-                        data: ($scope.editionDataArray),
+                        data: (vm.editionDataArray),
                         onResponse: function(response) {
                             console.log(response);
                             if (response.result == "valid") {
-                                $location.path('/home').replace()
+                                $location.path('/home')
                                 if (!$scope.$$phase) {
                                     $scope.$apply();
                                 }
                             } else {
-                                $scope.errorUploading = true;
+                                vm.errorUploading = true;
                             }
                             return response;
                         }
@@ -64,12 +74,12 @@
             }
         }
 
-        $scope.closeModal = function() {
+        function closeModal() {
             modal.style.display = "none";
         }
 
-        $scope.cancelEdit = function() {
-            $location.path('/profile').replace()
+        function cancelEdit() {
+            $location.path('/profile')
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
@@ -92,6 +102,5 @@
                     }
                 }
             })
-
     }
 })();
