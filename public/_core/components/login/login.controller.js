@@ -4,7 +4,7 @@
         .module('sedecApp')
         .controller('LoginController', LoginController);
 
-    function LoginController($scope, $http, $timeout, $location) {
+    function LoginController($scope, $location) {
 
         //When login fails, this becomes true 
         $scope.NotRegistered = false;

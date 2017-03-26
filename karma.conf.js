@@ -16,14 +16,19 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             './public/bower_components/jquery/dist/jquery.js',
+            './public/bower_components/semantic/dist/semantic.js',
             './public/bower_components/angular/angular.js',
             './public/bower_components/angular-route/angular-route.js',
             './public/bower_components/angular-mocks/angular-mocks.js', // loads our modules for tests
             './public/bower_components/angular-css/angular-css.js', // loads our modules for tests
             './public/bower_components/ng-flow/dist/ng-flow-standalone.js', // loads our modules for tests
-            './public/_core/app.js', // our angular app
-            './public/_core/components/home/homeCtrl.js', // our Home Ctrl
-            './public/_core/components/home/homeCtrl.spec.js' // our test file for our Home Ctrl
+            './public/_core/app.module.js', // our angular app
+            './public/_core/app.config.js', // our angular app
+            './public/_core/components/**/*.js', // our Home Ctrl
+            './public/_core/directives/**/*.js', // our Home Ctrl
+
+
+
         ],
 
 

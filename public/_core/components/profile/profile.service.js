@@ -4,7 +4,7 @@
         .module('sedecApp')
         .factory('profileService', profileService);
 
-    function profileService($rootScope, $q, $log, $http) {
+    function profileService($q, $http) {
         var service = {
             checkUser: checkUser
         };

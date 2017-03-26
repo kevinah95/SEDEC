@@ -2,9 +2,9 @@
     'use strict';
     angular
         .module('sedecApp')
-        .factory('resultService', resultService);
+        .factory('resultsService', resultsService);
 
-    function resultService($rootScope, $q, $log, $http) {
+    function resultsService($rootScope, $q, $log, $http) {
         var service = {
             getResults: getResults
         };

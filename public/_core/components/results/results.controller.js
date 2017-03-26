@@ -4,7 +4,7 @@
         .module('sedecApp')
         .controller('ResultsController', ResultsController);
 
-    function ResultsController($scope, resultService) {
+    function ResultsController($scope, resultsService) {
         var vm = this;
         vm.results = {};
         vm.userInfo = {
@@ -17,7 +17,7 @@
         });
 
         function activate(info) {
-            return resultService.getResults(info)
+            return resultsService.getResults(info)
                 .then(function(data) {
                     console.log(data);
                     vm.results = data;
