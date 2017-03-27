@@ -5,7 +5,7 @@
         .config(config)
         .run(runBlock);
 
-    function config($routeProvider, $locationProvider) {
+    function config($routeProvider, $locationProvider, $authProvider) {
 
         $routeProvider.when('/home', {
             templateUrl: '_core/components/home/homeView.html',
@@ -52,14 +52,21 @@
             redirectTo: '/login'
         });
 
+        $authProvider.loginUrl = 'http://localhost:8080/api/auth/login';
+        //$authProvider.signupUrl = 'http://localhost:8080/auth/signup';
+
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
     };
 
     // For more info: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#run-blocks
-    function runBlock($rootScope, $route, $location, $window) {
+    function runBlock($rootScope, $route, $location, $window, $auth) {
         //Bind the `$locationChangeSuccess` event on the rootScope, so that we dont need to
         //bind in induvidual controllers.
+
+        if ($auth.isAuthenticated()) {
+            $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+        }
 
         $rootScope.$on('$locationChangeSuccess', function() {
             $rootScope.actualLocation = $location.path();

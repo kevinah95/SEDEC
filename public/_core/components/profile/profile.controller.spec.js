@@ -66,16 +66,13 @@ describe('ProfileController', function() {
         });
 
         it('should call profileService.checkUser and return a User object', function() {
-            var RESPONSE_SUCCESS = {
-                'id': 58,
-                'name': 'growlithe',
-                'sprites': {
-                    'front_default': 'http://pokeapi.co/media/sprites/pokemon/58.png'
-                },
-                'types': [{
-                    'type': { 'name': 'fire' }
-                }]
-            };
+            var EXPECTED_RESULT = {
+                userId: 1,
+                organizationId: 1,
+                userMail: "kevinah95@gmail.com",
+                userName: "Kevin Hernandez",
+                userProfilePicture: "profile.png"
+            }
             profileService.checkUser(FAKE_USER)
                 .then(function(data) {
                     ProfileController.user = data;
@@ -86,7 +83,7 @@ describe('ProfileController', function() {
                     return error;
                 });
 
-            $httpBackend.expect('POST', API, FAKE_USER).respond(200, $q.when(RESPONSE_SUCCESS));
+            $httpBackend.expect('POST', API, FAKE_USER).respond(200, $q.when(EXPECTED_RESULT));
             expect(profileService.checkUser).toHaveBeenCalledWith(FAKE_USER);
             //$httpBackend.flush();
             /*$httpBackend.whenPOST(API, FAKE_USER).respond(200, $q.when(RESPONSE_SUCCESS));

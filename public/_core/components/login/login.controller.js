@@ -4,7 +4,7 @@
         .module('sedecApp')
         .controller('LoginController', LoginController);
 
-    function LoginController($scope, $location) {
+    function LoginController($scope, $rootScope, $location, $window, $auth, $timeout) {
 
         //When login fails, this becomes true 
         $scope.NotRegistered = false;
@@ -12,6 +12,8 @@
         $.fn.api.settings.api = {
             'login': 'http://localhost:8080/api/users/login',
         };
+
+
 
         $('.ui.form')
             .form({
@@ -37,10 +39,41 @@
                         }
                         return;
                     } else {
-                        $location.path('/home').replace()
+                        var email = $('.ui.form').form('get value', 'email');
+                        var password = $('.ui.form').form('get value', 'password');
+                        $auth.login({ email: email, password: password })
+                            .then(function(response) {
+                                $window.localStorage.currentUser = JSON.stringify(response.data);
+                                $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+                                console.log(response.data);
+                                $timeout(function() {
+                                    console.log($auth.isAuthenticated());
+                                }, 1000);
+                            })
+                            .catch(function(response) {
+                                $scope.errorMessage = {};
+                                angular.forEach(response.data.message, function(message, field) {
+                                    //$scope.loginForm[field].$setValidity('server', false);
+                                    //$scope.errorMessage[field] = response.data.message[field];
+                                    console.log(message);
+                                });
+                            });
+
+
+                        /*var user = {
+                            email: email,
+                            password: password
+                        };
+                        // Satellizer
+                        $auth.signup(user)
+                            .catch(function(response) {
+                                console.log(response.data);
+                            });*/
+                        //console.log($('.ui.form').form('get value', 'email'));
+                        /*$location.path('/home').replace()
                         if (!$scope.$phase) {
                             $scope.$apply();
-                        }
+                        }*/
                     }
                     return response;
                 }

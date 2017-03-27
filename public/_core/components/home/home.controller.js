@@ -4,7 +4,8 @@
         .module('sedecApp')
         .controller('HomeController', HomeController);
 
-    function HomeController($scope, $timeout, $location) {
+    function HomeController($scope, $timeout, $location, $auth) {
         this.message = "Hello";
+        console.log($auth.isAuthenticated());
     }
 })();
