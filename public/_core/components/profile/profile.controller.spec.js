@@ -54,20 +54,10 @@ describe('ProfileController', function() {
             expect($location.path).toHaveBeenCalledWith('/editUser');
         }));
     });
-    describe('.activate()', function() {
-        it('should exist', function() {
-            expect(ProfileController.activate).toBeDefined();
-        });
 
-        /*it('should return a hard-coded list of users', function() {
-            console.log(ProfileController.activate(FAKE_USER));
-            expect(ProfileController.user).toEqual(0);
-        });*/
-    });
-    describe('Profile Controller with a valid resolved user and a valid Pokemon', function() {
+    describe('.activate()', function() {
 
         beforeEach(function() {
-
             spyOn(profileService, "checkUser").and.callThrough();
         });
 

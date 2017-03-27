@@ -19,12 +19,12 @@
         function activate(info) {
             return resultsService.getResults(info)
                 .then(function(data) {
-                    console.log(data);
+                    //console.log(data);
                     vm.results = data;
                     return vm.results;
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    //console.log(error);
                     return error;
                 });
         };

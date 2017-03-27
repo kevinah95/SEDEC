@@ -17,7 +17,7 @@
         vm.activate = activate;
 
         $scope.$$postDigest(function() {
-            console.log('$$postDigest executed. Digest completed');
+            //console.log('$$postDigest executed. Digest completed');
             //console.log(vm.activate(vm.userInfo));
             vm.activate(vm.userInfo);
         });
@@ -44,7 +44,7 @@
                     return vm.user;
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    //console.log(error);
                     return error;
                 });
         };

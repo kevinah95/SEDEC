@@ -12,7 +12,7 @@
         navbar.upload = upload;
 
         function home() {
-            $location.path('/home').replace();
+            $location.path('/home');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
