@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('sedecApp')
@@ -12,6 +12,7 @@
         vm.editionDataArray = {};
         vm.submitForm = submitForm;
         vm.closeModal = closeModal;
+        vm.processFiles = processFiles;
         vm.cancelEdit = cancelEdit;
 
         var modal = document.getElementById('myModal');
@@ -20,17 +21,17 @@
             'editUser': 'http://localhost:8080/api/users/editUser'
         };
 
-        $scope.$on('flow::filesAdded', function(event, $flow, files) {
-            // document.getElementById("image_uploaded").value = "Not Empty";
-            angular.forEach(files, function(flowFile, i) {
+        function processFiles(files) {
+            document.getElementById("vm.image_uploaded").value = "Not Empty"; //Esto tiene que ir en la fución que me trae la info, en le valid
+            angular.forEach(files, function (flowFile, i) {
                 var fileReader = new FileReader();
-                fileReader.onload = function(event) {
+                fileReader.onload = function (event) {
                     var uri = event.target.result;
                     vm.imageStrings[i] = uri;
                 };
                 fileReader.readAsDataURL(flowFile.file);
             });
-        });
+        };
 
 
 
@@ -57,7 +58,7 @@
                         action: 'editUser',
                         method: 'POST',
                         data: (vm.editionDataArray),
-                        onResponse: function(response) {
+                        onResponse: function (response) {
                             console.log(response);
                             if (response.result == "valid") {
                                 $location.path('/home')
@@ -88,9 +89,9 @@
         $('.ui.form')
             .form({
                 fields: {
-                    // image_uploaded: {
-                    // 	rules: [{ type: 'empty', prompt: 'Debe seleccionar una imagen' }]
-                    // },
+                    image_uploaded: {
+                        rules: [{ type: 'empty', prompt: 'Debe seleccionar una imagen' }]
+                    },
                     mail: {
                         rules: [{ type: 'email', prompt: 'Ingrese un correo válida' }]
                     },

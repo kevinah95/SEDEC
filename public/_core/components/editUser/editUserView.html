@@ -2,7 +2,7 @@
 <div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
     <div class="ui middle aligned center aligned grid">
         <div class="ui basic center aligned segment">
-            <div flow-init="{target:'/uploader', maxChunkRetries: 1, singleFile: true}">
+            <div flow-init="{target:'/uploader', maxChunkRetries: 1, singleFile: true}" flow-name="uploader.flow" flow-files-added="vm.processFiles($files)">
                 <form class="ui form">
                     <div class="ui centered grid">
                         <div class="row">
@@ -14,10 +14,11 @@
                         </div>
                         <div class="row">
                             <div class="field">
-                                <img flow-btn flow-attrs="{accept:'image/*'}" flow-img="$flow.files[0]" class="ui small centered image" name="uploadedImage" src="_core/components/upload/assets/img/uploadImg.png" ng-model="vm.pic">
+                                <img flow-btn flow-attrs="{accept:'image/*'}" flow-img="$flow.files[0]" class="ui small centered image" name="uploadedImage"
+                                    src="_core/components/upload/assets/img/uploadImg.png" ng-model="vm.pic">
                                 <br></br>
                                 <span class="ui small button" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" style="background-color: #034A91; color: #FFFFFF">Cambiar imagen</span>
-                                <!--<input id="image_uploaded" ng-show="false" type="text" name="image_uploaded">-->
+                                <input id="vm.image_uploaded" ng-show="false" type="text" name="image_uploaded">
                             </div>
                         </div>
                         <div class="row">
