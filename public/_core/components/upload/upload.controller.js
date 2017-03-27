@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('sedecApp')
@@ -39,9 +39,10 @@
 
 
         function processFiles(files) {
-            angular.forEach(files, function(flowFile, i) {
+            document.getElementById("vm.image_uploaded").value = "Not Empty";
+            angular.forEach(files, function (flowFile, i) {
                 var fileReader = new FileReader();
-                fileReader.onload = function(event) {
+                fileReader.onload = function (event) {
                     var uri = event.target.result;
                     vm.imageStrings[i] = uri;
                 };
@@ -53,46 +54,59 @@
 
 
         function openModal() {
-            modal.style.display = "block";
+            var valid = $('.ui.form').form('validate form');
+            if (valid) {
+                modal.style.display = "block";
 
-            var form = $('.form');
-            var allFields = form.form('get values');
-            var uploadedImage = vm.imageStrings[0];
-            vm.analysisArray = {
-                "userId": 1, //Should be sessionStorage
-                "processId": vm.diseaseID,
-                "description": allFields.description,
-                "image": uploadedImage
-            };
+                var form = $('.form');
+                var allFields = form.form('get values');
+                var uploadedImage = vm.imageStrings[0];
+                vm.analysisArray = {
+                    "userId": 1, //Should be sessionStorage
+                    "processId": vm.diseaseID,
+                    "description": allFields.description,
+                    "image": uploadedImage
+                };
 
-            console.log(vm.analysisArray);
-            //Upload Image
-            $('.ui.large.submit.button')
-                .api({
-                    action: 'uploadAnalysis',
-                    method: 'POST',
-                    data: (vm.analysisArray),
-                    onResponse: function(response) {
-                        console.log(response);
-                        if (response.result == "valid") {
-                            $location.path('/home').replace()
-                            if (!$scope.$$phase) {
-                                $scope.$apply();
+                //console.log(vm.analysisArray);
+                //Upload Image
+                $('.ui.large.submit.button')
+                    .api({
+                        action: 'uploadAnalysis',
+                        method: 'POST',
+                        data: (vm.analysisArray),
+                        onResponse: function (response) {
+                            console.log(response);
+                            if (response.result == "valid") {
+                                $location.path('/home').replace()
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            } else {
+                                vm.errorUploading = true;
                             }
-                        } else {
-                            vm.errorUploading = true;
+                            return response;
                         }
-                        return response;
-                    }
 
-                });;
+                    });;
+            }
         }
 
         function closeModal() {
             modal.style.display = "none";
         }
 
-
+        $('.ui.form')
+            .form({
+                fields: {
+                    image_uploaded: {
+                        rules: [{ type: 'empty', prompt: 'Debe seleccionar una imagen' }]
+                    },
+                    disease: {
+                        rules: [{ type: 'empty', prompt: 'Seleccione una enfermedad' }]
+                    }
+                }
+            })
 
         $('.ui.dropdown').dropdown()
             .api({
@@ -100,12 +114,12 @@
                 method: 'POST',
                 data: info,
                 on: 'mouseenter',
-                onResponse: function(response) {
+                onResponse: function (response) {
                     vm.processesList = response;
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-                    console.log(response)
+                    //console.log(response)
                     return response;
                 }
             });;
