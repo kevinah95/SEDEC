@@ -4,6 +4,9 @@ var morgan = require('morgan'); // log requests to the console (express4)
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var mysql = require('mysql');
+var bcrypt = require('bcryptjs');
+var jwt = require('jwt-simple');
+var moment = require('moment');
 
 
 app.use(express.static('public')); // set the static files location /public/img will be /img for users
@@ -22,11 +25,49 @@ app.use(bodyParser.json({ type: 'application/*+json' }))
 app.use(methodOverride());
 
 var dbconfig = require('./config/database');
+var jwtconfig = require('./config/jwt');
+
 var pool = mysql.createPool(dbconfig.connection);
+//=====================auth=============================
+function createToken(user) { //TODO add to signup
+    var payload = {
+        exp: moment().add(14, 'days').unix(),
+        iat: moment().unix(),
+        sub: user.userId
+    };
 
+    return jwt.encode(payload, jwtconfig.tokenSecret);
+}
 
-// routes ======================================================================
+//Global var, call with: global.isAuthenticated  
+//For more information see: http://stackoverflow.com/a/17123976
+isAuthenticated = function(req, res, next) {
+        if (!(req.headers && req.headers.authorization)) {
+            return res.status(400).send({ message: 'You did not provide a JSON Web Token in the Authorization header.' });
+        }
+        //console.log(createToken("kevin"));
+        var header = req.headers.authorization.split(' ');
+        var token = header[1];
+        var payload = jwt.decode(token, jwtconfig.tokenSecret, true); //true for noVerify
+        var now = moment().unix();
+
+        if (now > payload.exp) {
+            return res.status(401).send({ payload: payload, now: now });
+        }
+
+        /*User.findById(payload.sub, function(err, user) {
+            if (!user) {
+                return res.status(400).send({ message: 'User no longer exists.' });
+            }
+
+            req.user = user;
+            next();
+        })*/
+        res.send({ msg: "good" });
+    }
+    // routes ======================================================================
 app.use(require('./app')(pool));
+
 
 // application -------------------------------------------------------------
 app.get('*', function(req, res) {

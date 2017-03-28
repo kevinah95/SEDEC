@@ -20,7 +20,7 @@ module.exports = function(pool) {
         }).join('');
         return binstr;
     }
-    router.post('/auth/login', function(req, res, next) {
+    router.post('/auth/login', global.isAuthenticated, function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL check_user(?,?)', [req.body.email, req.body.password], function(error, rows) {
                 if (error) {
