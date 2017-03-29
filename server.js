@@ -26,7 +26,7 @@ var pool = mysql.createPool(dbconfig.connection);
 //=====================auth=============================
 function createToken(user) { //TODO add to signup
     var payload = {
-        exp: moment().add(50, 'days').unix(),
+        exp: moment().add(14, 'days').unix(),
         iat: moment().unix(),
         sub: user.userId
     };

@@ -12,7 +12,7 @@ module.exports = function(pool) {
     'use strict';
 
     var router = express.Router();
-    router.post('/uploadAnalysis', upload.single('avatar'), function(req, res, next) {
+    router.post('/uploadAnalysis', upload.single(), function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL create_analysis(?,?,?,?);', [req.body.userId, req.body.processId, req.body.description, req.body.image], function(error, rows) {
                 if (error) {
