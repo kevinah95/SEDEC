@@ -23,9 +23,6 @@ module.exports = function(pool) {
                 if (!rows[0].length) {
                     res.status(500).send({ message: 'Something was wrong!' });
                 } else {
-                    var base64 = bufferToBase64(new Buffer(rows[0][0].userProfilePicture));
-                    rows[0][0].userProfilePicture = base64;
-                    //console.log(rows[0][0].userProfilePicture);
                     res.send(rows[0][0]);
                 }
                 connection.release();
@@ -48,15 +45,6 @@ module.exports = function(pool) {
             });
         });
     });
-
-    function bufferToBase64(buf) { //Buffer to base64
-        var binstr = Array.prototype.map.call(buf, function(ch) {
-            return String.fromCharCode(ch);
-        }).join('');
-        return binstr;
-    }
-
-
     router.post('/editUser', upload.single('avatar'), function(req, res, next) {
         console.log(req.body)
         pool.getConnection(function(err, connection) {

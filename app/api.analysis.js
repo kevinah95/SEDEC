@@ -12,15 +12,6 @@ module.exports = function(pool) {
     'use strict';
 
     var router = express.Router();
-
-    function bufferToBase64(buf) { //Buffer to base64
-        var binstr = Array.prototype.map.call(buf, function(ch) {
-            return String.fromCharCode(ch);
-        }).join('');
-        return binstr;
-    }
-
-
     router.post('/uploadAnalysis', upload.single('avatar'), function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL create_analysis(?,?,?,?);', [req.body.userId, req.body.processId, req.body.description, req.body.image], function(error, rows) {

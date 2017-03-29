@@ -31,7 +31,7 @@ var pool = mysql.createPool(dbconfig.connection);
 //=====================auth=============================
 function createToken(user) { //TODO add to signup
     var payload = {
-        exp: moment().add(14, 'days').unix(),
+        exp: moment().add(50, 'days').unix(),
         iat: moment().unix(),
         sub: user.userId
     };
@@ -50,20 +50,27 @@ isAuthenticated = function(req, res, next) {
         var token = header[1];
         var payload = jwt.decode(token, jwtconfig.tokenSecret, true); //true for noVerify
         var now = moment().unix();
-
         if (now > payload.exp) {
-            return res.status(401).send({ payload: payload, now: now });
+            return res.status(401).send({ message: 'Token has expired.' });
         }
 
-        /*User.findById(payload.sub, function(err, user) {
-            if (!user) {
-                return res.status(400).send({ message: 'User no longer exists.' });
-            }
+        pool.getConnection(function(err, connection) {
+            connection.query('CALL findById(?)', [payload.sub], function(error, rows) {
+                if (error) {
+                    res.status(500).send({ message: error.message });
+                    return next(error);
+                };
+                if (!rows[0].length) {
+                    res.status(500).send({ message: 'Something was wrong!' });
+                } else {
+                    req.user = rows[0][0];
+                }
+                connection.release();
+            });
+        });
 
-            req.user = user;
-            next();
-        })*/
-        res.send({ msg: "good" });
+
+        next();
     }
     // routes ======================================================================
 app.use(require('./app')(pool));

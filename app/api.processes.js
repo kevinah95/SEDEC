@@ -13,13 +13,6 @@ module.exports = function(pool) {
 
     var router = express.Router();
 
-
-    function bufferToBase64(buf) { //Buffer to base64
-        var binstr = Array.prototype.map.call(buf, function(ch) {
-            return String.fromCharCode(ch);
-        }).join('');
-        return binstr;
-    }
     router.post('/getProcesses', function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL get_user_processes(?)', [req.body.Id], function(error, rows) {
