@@ -91,6 +91,48 @@ module.exports = function(pool) {
                 });
         });
     });
+    router.post('/test03', function(req, res, next) {
+
+        pool.getConnection(function(err, connection) {
+            var query = connection.query({
+                sql: 'CALL dummy(?);',
+                values: [req.body.id]
+            });
+            var fields = [];
+            var rows = [];
+            query
+                .on('error', function(error) {
+                    // Handle error, an 'end' event will be emitted after this as well
+                    console.log(error);
+                    res.status(500).send({
+                        error: {
+                            error,
+                            message: error.message
+                        }
+                    });
+                    return next(error);
+                })
+                .on('fields', function(_fields) {
+                    // the field packets for the rows to follow
+                    //console.log(fields);
+
+                    fields = _fields
+                })
+                .on('result', function(row) {
+                    connection.pause();
+                    processRow(row, function() {
+                        //console.log(row.userProfilePicture.toString());
+                        connection.resume();
+                    });
+                    rows.push(row);
+                })
+                .on('end', function() {
+                    // all rows have been received
+                    res.json(rows[0]);
+                    connection.release();
+                });
+        });
+    });
 
     return router;
 };
