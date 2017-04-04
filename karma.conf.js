@@ -23,6 +23,7 @@ module.exports = function(config) {
             './public/bower_components/angular-mocks/angular-mocks.js', // loads our modules for tests
             './public/bower_components/angular-css/angular-css.js', // loads our modules for tests
             './public/bower_components/ng-flow/dist/ng-flow-standalone.js', // loads our modules for tests
+            './public/bower_components/satellizer/dist/satellizer.min.js', // loads our modules for tests
             './public/_core/app.module.js', // our angular app
             './public/_core/app.config.js', // our angular app
             './public/_core/components/**/*.js', // our Home Ctrl
