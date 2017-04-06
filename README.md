@@ -1,5 +1,19 @@
-# SEDEC [![Build Status](https://travis-ci.org/kevinah95/SEDEC.svg?branch=master)](https://travis-ci.org/kevinah95/SEDEC)
-Sistema Experto para Diagnóstico de Enfermedades en Cultivos
+<h1 align="center">
+  <a href="https://github.com/kevinah95/SEDEC"><img src="https://cdn.rawgit.com/kevinah95/SEDEC/master/sticker.svg" alt="SEDEC" width="200"></a>
+  <br>
+  SEDEC
+  <br>
+  <br>
+</h1>
+
+<p align="center">
+  <a href="https://travis-ci.org/kevinah95/SEDEC"><img src="https://travis-ci.org/kevinah95/SEDEC.svg?branch=master" alt="travis"></a>  
+</p>
+
+<h4 align="center">Sistema Experto para Diagnóstico de Enfermedades en Cultivos</h4>
+
+<br>
+
 ## Instrucciones para ejecutar SEDEC
 
 ### Requisitos previos
