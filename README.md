@@ -1,9 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/kevinah95/SEDEC"><img src="https://cdn.rawgit.com/kevinah95/SEDEC/master/sticker.svg" alt="SEDEC" width="200"></a>
   <br>
-  SEDEC
-  <br>
-  <br>
 </h1>
 
 <p align="center">
