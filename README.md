@@ -7,7 +7,7 @@
   <a href="https://travis-ci.org/kevinah95/SEDEC"><img src="https://travis-ci.org/kevinah95/SEDEC.svg?branch=master" alt="travis"></a>  
 </p>
 
-<h4 align="center">Sistema Experto para Diagnóstico de Enfermedades en Cultivos</h4>
+<h3 align="center">Sistema Experto para Diagnóstico de Enfermedades en Cultivos</h4>
 
 <br>
 
