@@ -10,7 +10,7 @@
         $scope.NotRegistered = false;
 
         $.fn.api.settings.api = {
-            'login': 'http://localhost:8080/api/users/login',
+            'login': 'http://localhost:8080/api/auth/login',
         };
 
 
@@ -43,10 +43,14 @@
                         var password = $('.ui.form').form('get value', 'password');
                         $auth.login({ email: email, password: password })
                             .then(function(response) {
-                                $window.localStorage.currentUser = JSON.stringify(response.data);
+                                $window.localStorage.currentUser = JSON.stringify(response.data.user);
                                 $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
-                                console.log(response.data);
+                                //console.log(response.data);
                                 $timeout(function() {
+                                    $location.path('/home').replace()
+                                    if (!$scope.$phase) {
+                                        $scope.$apply();
+                                    }
                                     console.log($auth.isAuthenticated());
                                 }, 1000);
                             })

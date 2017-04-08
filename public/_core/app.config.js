@@ -31,6 +31,7 @@
         $routeProvider.when('/login', {
             templateUrl: '_core/components/login/loginView.html',
             controller: 'LoginController',
+            controllerAs: 'vm',
             css: '_core/components/login/login.css'
         });
 
@@ -46,6 +47,18 @@
             controller: 'EditUserController',
             controllerAs: 'vm',
             css: '_core/components/editUser/editUser.css'
+        });
+
+        $routeProvider.when('/admin', {
+            templateUrl: '_core/components/admin/main/admin.view.html',
+            controller: 'AdminController',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/admin/signup', {
+            templateUrl: '_core/components/admin/signup/signup.view.html',
+            controller: 'SignupController',
+            controllerAs: 'vm'
         });
 
         $routeProvider.otherwise({

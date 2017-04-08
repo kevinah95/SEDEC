@@ -10,6 +10,7 @@
         navbar.profile = profile;
         navbar.results = results;
         navbar.upload = upload;
+        navbar.admin = admin;
 
         function home() {
             $location.path('/home');
@@ -34,6 +35,13 @@
 
         function upload() {
             $location.path('/upload');
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        };
+
+        function admin() {
+            $location.path('/admin');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }

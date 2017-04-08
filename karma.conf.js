@@ -7,7 +7,6 @@ module.exports = function(config) {
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
 
-
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['jasmine'],
@@ -28,9 +27,6 @@ module.exports = function(config) {
             './public/_core/app.config.js', // our angular app
             './public/_core/components/**/*.js', // our Home Ctrl
             './public/_core/directives/**/*.js', // our Home Ctrl
-
-
-
         ],
 
 
@@ -46,7 +42,7 @@ module.exports = function(config) {
         // test results reporter to use
         // possible values: 'dots', 'progress', 'spec'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['spec'],
+        reporters: ['mocha'],
 
 
         // web server port

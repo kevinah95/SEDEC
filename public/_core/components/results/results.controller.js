@@ -4,17 +4,22 @@
         .module('sedecApp')
         .controller('ResultsController', ResultsController);
 
-    function ResultsController($scope, resultsService) {
+    function ResultsController($rootScope, $scope, resultsService, $auth) {
+
         var vm = this;
         vm.results = {};
-        vm.userInfo = {
-            id: 1
-        };
+        if ($auth.isAuthenticated() && $rootScope.currentUser) {
+            /*API.getFeed().success(function(data) {
+                $scope.photos = data;
+            });*/
+            console.log($auth.isAuthenticated());
+            $scope.$$postDigest(function() {
+                console.log('$$postDigest executed. Digest completed');
+                activate($rootScope.currentUser);
+            });
+        }
 
-        $scope.$$postDigest(function() {
-            console.log('$$postDigest executed. Digest completed');
-            activate(vm.userInfo);
-        });
+
 
         function activate(info) {
             return resultsService.getResults(info)
