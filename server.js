@@ -7,6 +7,7 @@ var mysql = require('mysql');
 var bcrypt = require('bcryptjs');
 var jwt = require('jwt-simple');
 var moment = require('moment');
+var cors = require('cors');
 
 
 app.use(express.static('public')); // set the static files location /public/img will be /img for users
@@ -18,6 +19,8 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(bodyParser.json({ type: 'application/*+json' }))
 
 app.use(methodOverride());
+
+app.use(cors());
 
 var dbconfig = require('./config/database');
 var jwtconfig = require('./config/jwt');
