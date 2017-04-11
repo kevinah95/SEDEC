@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('app.core')
         .factory('resultsService', resultsService);
 
     function resultsService($q, $http) {

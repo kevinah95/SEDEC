@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('app.results')
         .controller('ResultsController', ResultsController);
 
     function ResultsController($rootScope, $scope, resultsService, $auth) {

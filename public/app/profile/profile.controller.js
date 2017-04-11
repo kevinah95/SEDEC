@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('app.profile')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($scope, $location, profileService) {
+    function ProfileController($scope, $location, $rootScope) {
         var vm = this;
         vm.results = {};
         vm.user = {};
@@ -14,12 +14,9 @@
         };
         vm.logout = logout;
         vm.editUser = editUser;
-        vm.activate = activate;
 
         $scope.$$postDigest(function() {
-            //console.log('$$postDigest executed. Digest completed');
-            //console.log(vm.activate(vm.userInfo));
-            vm.activate(vm.userInfo);
+            vm.user = $rootScope.currentUser;
         });
 
         function logout() {
@@ -34,19 +31,6 @@
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
-        };
-
-        function activate(info) {
-            return profileService.checkUser(info)
-                .then(function(data) {
-                    vm.user = data
-
-                    return vm.user;
-                })
-                .catch(function(error) {
-                    //console.log(error);
-                    return error;
-                });
         };
 
     }

@@ -1,7 +1,7 @@
-(function () {
+(function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('app.upload')
         .controller('UploadController', UploadController);
 
     function UploadController($scope, $http, $timeout, $location) {
@@ -40,9 +40,9 @@
 
         function processFiles(files) {
             document.getElementById("vm.image_uploaded").value = "Not Empty";
-            angular.forEach(files, function (flowFile, i) {
+            angular.forEach(files, function(flowFile, i) {
                 var fileReader = new FileReader();
-                fileReader.onload = function (event) {
+                fileReader.onload = function(event) {
                     var uri = event.target.result;
                     vm.imageStrings[i] = uri;
                 };
@@ -75,7 +75,7 @@
                         action: 'uploadAnalysis',
                         method: 'POST',
                         data: (vm.analysisArray),
-                        onResponse: function (response) {
+                        onResponse: function(response) {
                             console.log(response);
                             if (response.result == "valid") {
                                 $location.path('/home').replace()
@@ -114,7 +114,7 @@
                 method: 'POST',
                 data: info,
                 on: 'mouseenter',
-                onResponse: function (response) {
+                onResponse: function(response) {
                     vm.processesList = response;
                     if (!$scope.$$phase) {
                         $scope.$apply();

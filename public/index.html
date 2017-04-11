@@ -23,7 +23,7 @@
     <!-- Other scripts -->
 
     <!-- use the HTML5 History API [Angular] -->
-    <base href="/">
+    <!--<base href="/">-->
     <style type="text/css">
         body {
             background-color: #CCCCCC;
@@ -46,17 +46,32 @@
     <!-- core module -->
     <script src="app/core/core.module.js"></script>
     <!--Services-->
-    <script src="app/components/results/results.service.js"></script>
-    <script src="app/components/profile/profile.service.js"></script>
+    <script src="app/services/results.service.js"></script>
     <!-- directives -->
     <script src="app/directives/navbar/navbar.controller.js"></script>
     <script src="app/directives/navbar/navbar.directive.js"></script>
     <!-- controllers -->
-    <script src="app/components/home/home.controller.js"></script>
-    <script src="app/components/profile/profile.controller.js"></script>
-    <script src="app/components/results/results.controller.js"></script>
-    <script src="app/components/login/login.controller.js"></script>
-    <script src="app/components/upload/upload.controller.js"></script>
+    <!--login-->
+    <script src="app/login/login.module.js"></script>
+    <script src="app/login/login.config.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    <!--home-->
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/home.config.js"></script>
+    <script src="app/home/home.controller.js"></script>
+    <!--upload-->
+    <script src="app/upload/upload.module.js"></script>
+    <script src="app/upload/upload.config.js"></script>
+    <script src="app/upload/upload.controller.js"></script>
+    <!--results-->
+    <script src="app/results/results.module.js"></script>
+    <script src="app/results/results.config.js"></script>
+    <script src="app/results/results.controller.js"></script>
+    <!--profile-view-->
+    <script src="app/profile/profile.module.js"></script>
+    <script src="app/profile/profile.config.js"></script>
+    <script src="app/profile/profile.controller.js"></script>
+
     <script src="app/components/editUser/editUser.controller.js"></script>
     <script src="app/components/admin/main/admin.controller.js"></script>
     <script src="app/components/admin/signup/signup.controller.js"></script>

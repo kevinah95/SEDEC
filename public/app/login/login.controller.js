@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('app.login')
         .controller('LoginController', LoginController);
 
     function LoginController($scope, $rootScope, $location, $window, $auth, $timeout) {
