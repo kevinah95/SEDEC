@@ -23,10 +23,10 @@ module.exports = function(config) {
             './public/bower_components/angular-css/angular-css.js', // loads our modules for tests
             './public/bower_components/ng-flow/dist/ng-flow-standalone.js', // loads our modules for tests
             './public/bower_components/satellizer/dist/satellizer.min.js', // loads our modules for tests
-            './public/_core/app.module.js', // our angular app
-            './public/_core/app.config.js', // our angular app
-            './public/_core/components/**/*.js', // our Home Ctrl
-            './public/_core/directives/**/*.js', // our Home Ctrl
+            './public/app/app.module.js', // our angular app
+            './public/app/app.config.js', // our angular app
+            './public/app/components/**/*.js', // our Home Ctrl
+            './public/app/directives/**/*.js', // our Home Ctrl
         ],
 
 

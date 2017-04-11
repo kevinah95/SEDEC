@@ -6,7 +6,7 @@
 
     function navbarDirective() {
         var directive = {
-            templateUrl: '_core/directives/navbar/navbarDirective.html',
+            templateUrl: 'app/directives/navbar/navbarDirective.html',
             transclude: true,
             replace: true,
             controller: 'NavbarController',
