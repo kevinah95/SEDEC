@@ -41,7 +41,7 @@
         };
 
         function admin() {
-            $location.path('/admin');
+            $location.path('/admin/main');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }

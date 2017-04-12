@@ -7,18 +7,6 @@
 
     function config($routeProvider, $locationProvider, $authProvider, $stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('login');
-        $stateProvider
-            .state('admin', {
-                url: '/admin',
-                templateUrl: 'app/components/admin/main/admin.view.html',
-                controller: 'AdminController',
-                controllerAs: 'vm'
-            }).state('admin.signup', {
-                url: '/admin/signup',
-                templateUrl: 'app/components/admin/signup/signup.view.html',
-                controller: 'SignupController',
-                controllerAs: 'vm'
-            });
 
         /*$routeProvider.otherwise({
             redirectTo: '/login'

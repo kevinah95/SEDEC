@@ -33,13 +33,13 @@ app.use(require('./app')(pool));
 
 app.use('/bower_components', express.static(__dirname + '/public/bower_components'));
 app.use('/app', express.static(__dirname + '/public/app'));
-app.use('/', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 
 // application -------------------------------------------------------------
 app.all('/*', function(req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
-    res.sendFile('/public/index.html', { root: __dirname });
+    res.sendFile('index.html', { root: __dirname + '/public' });
 });
 
 /*app.get('*', function(req, res) {

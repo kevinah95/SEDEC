@@ -12,6 +12,6 @@
              * Feature areas
              */
             'app.login', 'app.home', 'app.upload',
-            'app.results', 'app.profile'
+            'app.results', 'app.profile', 'app.admin'
         ]);
 })();

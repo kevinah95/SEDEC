@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('sedecApp')
+        .module('admin.signup')
         .controller('SignupController', SignupController);
 
     function SignupController($scope, $location) {
