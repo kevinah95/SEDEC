@@ -20,7 +20,7 @@
         };
 
         function profile() {
-            $location.path('/profile/index');
+            $location.path('/profile/main');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }

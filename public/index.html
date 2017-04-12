@@ -23,7 +23,7 @@
     <!-- Other scripts -->
 
     <!-- use the HTML5 History API [Angular] -->
-    <!--<base href="/">-->
+    <base href="/">
     <style type="text/css">
         body {
             background-color: #CCCCCC;
@@ -33,6 +33,7 @@
 
 <body>
     <div ui-view></div>
+    <!--vendor-->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/semantic/dist/semantic.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -67,12 +68,17 @@
     <script src="app/results/results.module.js"></script>
     <script src="app/results/results.config.js"></script>
     <script src="app/results/results.controller.js"></script>
-    <!--profile-view-->
-    <script src="app/profile/profile.module.js"></script>
-    <script src="app/profile/profile.config.js"></script>
-    <script src="app/profile/profile.controller.js"></script>
+    <!--profile-main-->
+    <script src="app/profile/main/profile.module.js"></script>
+    <script src="app/profile/main/profile.config.js"></script>
+    <script src="app/profile/main/profile.controller.js"></script>
+    <!--profile-edit-->
+    <script src="app/profile/edit/profile-edit.module.js"></script>
+    <script src="app/profile/edit/profile-edit.config.js"></script>
+    <script src="app/profile/edit/profile-edit.controller.js"></script>
 
-    <script src="app/components/editUser/editUser.controller.js"></script>
+
+    <!--<script src="app/components/editUser/editUser.controller.js"></script>-->
     <script src="app/components/admin/main/admin.controller.js"></script>
     <script src="app/components/admin/signup/signup.controller.js"></script>
 
