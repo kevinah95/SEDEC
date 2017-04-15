@@ -9,5 +9,6 @@ module.exports = function(pool) {
     router.use('/api/analysis', require('./api.analysis')(pool))
     router.use('/api/processes', require('./api.processes')(pool))
     router.use('/api', require('./api.auth')(pool))
+    router.use('/api/v1', require('./api.v1.users')(pool))
     return router;
 };

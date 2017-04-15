@@ -8,12 +8,6 @@
     function config($routeProvider, $locationProvider, $authProvider, $stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('login');
 
-        /*$routeProvider.otherwise({
-            redirectTo: '/login'
-        });*/
-
-
-
         $authProvider.loginUrl = 'http://localhost:8080/api/auth/login';
         //$authProvider.signupUrl = 'http://localhost:8080/auth/signup';
 
