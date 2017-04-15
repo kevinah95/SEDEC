@@ -28,26 +28,21 @@ var jwtconfig = require('./config/jwt');
 
 var pool = mysql.createPool(dbconfig.connection);
 
-//
-var pool2 = mysql.createPool(require('./config/database.v1').connection);
 
-pool2.getConnection(function(err, connection) {
-    connection.query('Select * from tbl_employeedetails;', function(error, rows) {
-        if (error) {
-            console.log({ message: error.message });
-            return next(error);
-        };
-        if (!rows[0].length) {
-            console.log({ rows: rows });
-            console.log({ message: 'Something was wrong!' });
-        } else {
-            console.log(rows[0][0]);
-        }
-        connection.release();
-    });
-});
+
 // routes ======================================================================
+/**
+ * Auth Middleware - This will check if the token is valid
+ * Only the requests that start with /api/v1/* will be checked for the token.
+ * Any URL's that do not follow the below pattern should be avoided unless you
+ * are sure that authentication is not needed.
+ */
+app.all('/api/v1/*', [require('./middlewares/isAuthenticated')]);
+
+
 app.use(require('./app')(pool));
+app.use('/', require('./routes'));
+
 
 app.use('/bower_components', express.static(__dirname + '/public/bower_components'));
 app.use('/app', express.static(__dirname + '/public/app'));
