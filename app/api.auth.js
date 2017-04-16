@@ -43,7 +43,6 @@ module.exports = function(pool) {
                 };
                 console.log(rows[0]);
                 if (!rows[0].length) {
-                    //res.status(500).send({ message: 'Something was wrong!' });
                     res.status(500).send({ message: { email: 'Incorrect email' } });
                     return next();
                 } else {

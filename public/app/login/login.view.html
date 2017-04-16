@@ -7,7 +7,7 @@
                     <img class="ui centered image" src="app/login/assets/img/logo.png">
                     <hr>
                     <!--FORM-->
-                    <form class="ui large form">
+                    <form id="form" class="ui large form">
                         <div class="ui stacked segment">
                             <h3 class="ui centered header">
                                 <div class="content">
@@ -28,11 +28,6 @@
                             </div>
                             <div class="ui fluid large submit button" ng-click="submit()" style="background-color: #95C623; color: #FFFFFF">Ingresar</div>
                             <div class="ui error message"></div>
-                            <h4 class="ui red centered header">
-                                <div class="content" ng-show="NotRegistered">
-                                    Los valores ingresados no corresponden a ningún usuario registrado
-                                </div>
-                            </h4>
                         </div>
                     </form>
                 </div>

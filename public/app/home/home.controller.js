@@ -8,6 +8,8 @@
         this.message = "Hello";
         if ($auth.isAuthenticated()) {
             toastr.success('Usuario autenticado', 'Success');
+        } else {
+            toastr.error('Usuario no autenticado', 'Error');
         }
     }
 })();

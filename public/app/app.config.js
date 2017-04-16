@@ -12,12 +12,12 @@
         //$authProvider.signupUrl = 'http://localhost:8080/auth/signup';
 
         // use the HTML5 History API
-        $locationProvider.html5Mode(true).hashPrefix('!');
-        /*$locationProvider.html5Mode({
+        //$locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode({
             enabled: true,
             requireBase: false,
             rewriteLinks: false
-        });*/
+        });
     };
 
     // For more info: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#run-blocks
