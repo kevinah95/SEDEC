@@ -15,7 +15,7 @@ module.exports = function(pool) {
 
     var router = express.Router();
 
-    router.post('/getResults', jwt.isAuthenticated(pool), function(req, res, next) {
+    router.post('/getResults', function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL get_user_answers(?);', [req.body.userId], function(error, rows) {
                 if (error) {
@@ -23,6 +23,7 @@ module.exports = function(pool) {
                     return next(error);
                 };
                 if (!rows[0].length) {
+                    console.log(rows);
                     res.status(500).send({ message: 'Something was wrong!' });
                 } else {
                     res.send(rows[0]);
