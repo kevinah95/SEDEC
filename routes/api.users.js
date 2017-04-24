@@ -11,7 +11,7 @@ var users = {
                 return next(error);
             };
             if (!rows[0].length) {
-                res.status(500).send({ message: 'Something was wrong!' });
+                res.status(204).send();
             } else {
                 res.send(rows[0]);
             }
@@ -19,13 +19,13 @@ var users = {
     },
 
     getOne: function(req, res, next) {
-        pool.query('CALL find_by_id(?)', [req.params.id], function(error, rows) {
+        pool.query('CALL user_find_by_id(?)', [req.params.id], function(error, rows) {
             if (error) {
                 res.status(500).send({ message: error.message });
                 return next(error);
             };
             if (!rows[0].length) {
-                res.status(204).send({ message: 'No Content' });
+                res.status(204).send();
             } else {
                 res.send(rows[0][0]);
             }
@@ -53,7 +53,7 @@ var users = {
 
     update: function(req, res, next) {
         pool.query({
-                sql: 'CALL update_user_profile(?,?,?,?,?)'
+                sql: 'CALL user_update_profile(?,?,?,?,?)'
             }, [
                 req.params.id,
                 req.body.email,

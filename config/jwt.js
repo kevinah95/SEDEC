@@ -30,7 +30,7 @@ exports.isAuthenticated = function(pool) {
         }
 
         pool.getConnection(function(err, connection) {
-            connection.query('CALL find_by_id(?)', [payload.sub], function(error, rows) {
+            connection.query('CALL user_find_by_id(?)', [payload.sub], function(error, rows) {
                 if (error) {
                     res.status(500).send({ message: error.message });
                     return next(error);

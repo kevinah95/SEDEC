@@ -43,13 +43,13 @@ module.exports = function(pool) {
                 };
                 console.log(rows[0]);
                 if (!rows[0].length) {
-                    res.status(500).send({ message: { email: 'Incorrect email' } });
+                    res.status(500).send({ message: { email: 'Correo Incorrecto' } });
                     return next();
                 } else {
                     var user = rows[0][0];
                     bcrypt.compare(req.body.password, user.userPassword, function(err, isMatch) {
                         if (!isMatch) {
-                            res.status(500).send({ message: { password: 'Incorrect password' } });
+                            res.status(500).send({ message: { password: 'Contraseña Incorrecta' } });
                             return next();
                         }
 

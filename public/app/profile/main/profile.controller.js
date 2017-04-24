@@ -8,10 +8,6 @@
         var vm = this;
         vm.results = {};
         vm.user = {};
-        vm.userInfo = {
-            mailp: "kevinah95@gmail.com",
-            passp: "123"
-        };
         vm.logout = logout;
         vm.editUser = editUser;
 

@@ -17,7 +17,7 @@ module.exports = function(pool) {
 
     router.post('/getResults', jwt.isAuthenticated(pool), function(req, res, next) {
         pool.getConnection(function(err, connection) {
-            connection.query('CALL get_user_answers(?);', [req.body.userId], function(error, rows) {
+            connection.query('CALL results_find_by_user_id(?);', [req.body.userId], function(error, rows) {
                 if (error) {
                     res.status(500).send({ message: error.message });
                     return next(error);

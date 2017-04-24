@@ -48,7 +48,7 @@ module.exports = function(pool) {
     router.post('/editUser', upload.single('avatar'), function(req, res, next) {
         console.log(req.body)
         pool.getConnection(function(err, connection) {
-            connection.query('CALL update_user_profile(?,?,?,?,?)', [req.body.userId, req.body.mail, req.body.password, req.body.name, req.body.image], function(error, rows) {
+            connection.query('CALL user_update_profile(?,?,?,?,?)', [req.body.userId, req.body.mail, req.body.password, req.body.name, req.body.image], function(error, rows) {
                 if (error) {
                     res.status(500).send({ message: error.message });
                     return next(error);

@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `analysis` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
--- Dumping structure for table sedec.analysisresult
-CREATE TABLE IF NOT EXISTS `analysisresult` (
+-- Dumping structure for table sedec.analysis_result
+CREATE TABLE IF NOT EXISTS `analysis_result` (
   `analysisResultId` int(11) NOT NULL AUTO_INCREMENT,
   `resultMessage` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `analysisId` int(11) NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `analysisresult` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
--- Dumping structure for table sedec.controllog
-CREATE TABLE IF NOT EXISTS `controllog` (
+-- Dumping structure for table sedec.control_log
+CREATE TABLE IF NOT EXISTS `control_log` (
   `controlLogId` int(11) NOT NULL AUTO_INCREMENT,
   `dateTime` date DEFAULT NULL,
   `table` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `idResult` int(11) DEFAULT NULL,
   PRIMARY KEY (`idNotification`),
   KEY `fk_result_idx` (`idResult`),
-  CONSTRAINT `fk_result` FOREIGN KEY (`idResult`) REFERENCES `analysisresult` (`analysisResultId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_result` FOREIGN KEY (`idResult`) REFERENCES `analysis_result` (`analysisResultId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `process` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
--- Dumping structure for table sedec.processbyorganization
-CREATE TABLE IF NOT EXISTS `processbyorganization` (
+-- Dumping structure for table sedec.process_by_organization
+CREATE TABLE IF NOT EXISTS `process_by_organization` (
   `organizationId` int(11) NOT NULL,
   `processId` int(11) NOT NULL,
   PRIMARY KEY (`processId`,`organizationId`),
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `processbyorganization` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
--- Dumping structure for table sedec.processbyuser
-CREATE TABLE IF NOT EXISTS `processbyuser` (
+-- Dumping structure for table sedec.process_by_user
+CREATE TABLE IF NOT EXISTS `process_by_user` (
   `userId` int(11) NOT NULL,
   `processId` int(11) NOT NULL,
   PRIMARY KEY (`userId`,`processId`),
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 DELIMITER //
 CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `answer_analysis`(IN `resultContentp` VARCHAR(500), IN `analysisIdp` INT)
     NO SQL
-INSERT INTO `analysisresult` (`analysisResultId`, `resultMessage`, `analysisId`) VALUES (NULL, resultContentp, analysisIdp)//
+INSERT INTO `analysis_result` (`analysisResultId`, `resultMessage`, `analysisId`) VALUES (NULL, resultContentp, analysisIdp)//
 DELIMITER ;
 
 -- Dumping structure for procedure sedec.check_user
@@ -197,9 +197,9 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure sedec.find_by_id
+-- Dumping structure for procedure sedec.user_find_by_id
 DELIMITER //
-CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `find_by_id`(
+CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `user_find_by_id`(
 	IN `userId` INT
 
 
@@ -230,25 +230,30 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure sedec.get_user_answers
-DELIMITER //
-CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `get_user_answers`(IN `userIdp` INT)
-    NO SQL
-SELECT a.analysisId,p.processName,a.sampleDescription,a.samplePicture, r.resultMessage, n.notificationDatetime FROM analysis a inner join process p on p.processId = a.processId INNER JOIN analysisresult r on a.analysisId = r.analysisId INNER JOIN notification n ON r.analysisResultId = n.idResult where a.userId = userIdp ORDER BY n.notificationDatetime DESC//
-DELIMITER ;
-
 -- Dumping structure for procedure sedec.get_user_notifications
 DELIMITER //
-CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `get_user_notifications`(IN `userIdp` INT)
+CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `get_user_notifications`(
+	IN `userIdp` INT
+)
     NO SQL
-SELECT n.idNotification,n.idResult,n.notificationDatetime FROM notification n INNER JOIN analysisresult r ON n.idResult = r.analysisResultId INNER JOIN analysis a ON r.analysisId = a.analysisId INNER JOIN user u ON a.userId = u.userId WHERE a.userId = userIdp AND n.viewed = 0 ORDER BY n.notificationDatetime DESC//
+SELECT n.idNotification,n.idResult,DATE_FORMAT(n.notificationDatetime,'%b/%d/%Y - %h:%i %p') as 'notificationDatetime' FROM notification n INNER JOIN analysis_result r ON n.idResult = r.analysisResultId INNER JOIN analysis a ON r.analysisId = a.analysisId INNER JOIN user u ON a.userId = u.userId WHERE a.userId = userIdp AND n.viewed = 0 ORDER BY n.notificationDatetime DESC//
 DELIMITER ;
 
 -- Dumping structure for procedure sedec.processes_find_by_user_id
 DELIMITER //
 CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `processes_find_by_user_id`(IN `userIdp` INT)
     NO SQL
-SELECT p.processId,p.processName,p.processDescription FROM process p INNER JOIN processbyuser pbu on pbu.processId = p.processId INNER JOIN user u ON pbu.userId = u.userId WHERE u.userId = userIdp//
+SELECT p.processId,p.processName,p.processDescription FROM process p INNER JOIN process_by_user pbu on pbu.processId = p.processId INNER JOIN user u ON pbu.userId = u.userId WHERE u.userId = userIdp//
+DELIMITER ;
+
+-- Dumping structure for procedure sedec.results_find_by_user_id
+DELIMITER //
+CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `results_find_by_user_id`(
+	IN `userIdp` INT
+
+)
+    NO SQL
+SELECT a.analysisId,p.processName,a.sampleDescription,a.samplePicture, r.resultMessage, DATE_FORMAT(n.notificationDatetime,'%b/%d/%Y - %h:%i %p') as 'notificationDatetime' FROM analysis a inner join process p on p.processId = a.processId INNER JOIN analysis_result r on a.analysisId = r.analysisId INNER JOIN notification n ON r.analysisResultId = n.idResult where a.userId = userIdp ORDER BY n.notificationDatetime DESC//
 DELIMITER ;
 
 -- Dumping structure for procedure sedec.user_update_profile
@@ -262,7 +267,7 @@ DELIMITER ;
 DELIMITER //
 CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `write_answer`(IN `resultContentp` VARCHAR(500), IN `analysisIdp` INT)
     NO SQL
-INSERT INTO `analysisresult` (`analysisResultId`, `resultMessage`, `analysisId`) VALUES (NULL, resultContentp, analysisIdp)//
+INSERT INTO `analysis_result` (`analysisResultId`, `resultMessage`, `analysisId`) VALUES (NULL, resultContentp, analysisIdp)//
 DELIMITER ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
