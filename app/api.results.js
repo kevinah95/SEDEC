@@ -15,7 +15,7 @@ module.exports = function(pool) {
 
     var router = express.Router();
 
-    router.post('/getResults', jwt.isAuthenticated(pool), function(req, res, next) {
+    router.post('/getResults', function(req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query('CALL results_find_by_user_id(?);', [req.body.userId], function(error, rows) {
                 if (error) {

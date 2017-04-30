@@ -15,15 +15,21 @@
         //$locationProvider.html5Mode(true).hashPrefix('!');
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: false,
-            rewriteLinks: false
+            requireBase: false
         });
+        if (window.history && window.history.pushState) {
+            $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+            }).hashPrefix('');
+        }
     };
 
     // For more info: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#run-blocks
     function runBlock($rootScope, $route, $location, $window, $auth, $state) {
         //Bind the `$locationChangeSuccess` event on the rootScope, so that we dont need to
         //bind in induvidual controllers.
+
 
         if ($auth.isAuthenticated()) {
             $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);

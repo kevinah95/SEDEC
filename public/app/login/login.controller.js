@@ -30,12 +30,19 @@
             .api({
                 action: 'login',
                 serializeForm: true,
-                method: 'POST',
+                method: 'GET',
                 data: $(this).serialize(),
+                beforeSend: function(settings) {
+                    /*settings.data = {
+                        email: $('.ui.form').form('get value', 'email'),
+                        password: $('.ui.form').form('get value', 'password')
+                    };*/
+
+                    //console.log(settings);
+                    return settings;
+                },
                 onSuccess: function(response) {
-                    var email = $('.ui.form').form('get value', 'email');
-                    var password = $('.ui.form').form('get value', 'password');
-                    console.log(response);
+                    //console.log(response);
                     $auth.setToken(response.token);
                     $window.localStorage.currentUser = JSON.stringify(response.user);
                     $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);

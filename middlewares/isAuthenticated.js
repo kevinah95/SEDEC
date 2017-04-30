@@ -5,10 +5,16 @@ var pool = mysql.createPool(require('../config/database').connection);
 var jwtconfig = require('../config/jwt');
 
 module.exports = function(req, res, next) {
+    /**
+     * Validate Header
+     */
     if (!(req.headers && req.headers.authorization)) {
         return res.status(400).send({ message: 'You did not provide a JSON Web Token in the Authorization header.' });
     }
-    //console.log(createToken("kevin"));
+
+    /**
+     * Validate token
+     */
     var header = req.headers.authorization.split(' ');
     var token = header[1];
     var payload = jwt.decode(token, jwtconfig.tokenSecret, true); //true for noVerify
@@ -17,6 +23,9 @@ module.exports = function(req, res, next) {
         return res.status(401).send({ message: 'Token has expired.' });
     }
 
+    /**
+     * Validate user
+     */
     pool.getConnection(function(err, connection) {
         connection.query('CALL user_find_by_id(?)', [payload.sub], function(error, rows) {
             if (error) {
