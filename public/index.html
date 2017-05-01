@@ -9,21 +9,21 @@
     <!-- Las 3 tags 'meta' de arriba son necesarias para el diseño web adaptable -->
     <title>SEDEC</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/angular-toastr/dist/angular-toastr.css">
 
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
 
     <!-- Angular JS -->
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
-    <script src="bower_components/angular-css/angular-css.min.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-css/angular-css.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
 
     <!-- Other scripts -->
 
     <!-- use the HTML5 History API [Angular] -->
-    <base href="/">
+    <base href="/"></base>
     <style type="text/css">
         body {
             background-color: #CCCCCC;
@@ -33,33 +33,57 @@
 
 <body>
     <div ui-view></div>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/semantic/dist/semantic.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="bower_components/satellizer/dist/satellizer.min.js"></script>
-    <script src="bower_components/flow.js/dist/flow.min.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow.min.js"></script>
-    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <!--vendor-->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/semantic/dist/semantic.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/satellizer/dist/satellizer.min.js"></script>
+    <script src="/bower_components/flow.js/dist/flow.min.js"></script>
+    <script src="/bower_components/ng-flow/dist/ng-flow.min.js"></script>
+    <script src="/bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <!-- Bootstrapping -->
-    <script src="app/app.module.js"></script>
-    <script src="app/app.config.js"></script>
+    <script src="/app/app.module.js"></script>
+    <script src="/app/app.config.js"></script>
     <!-- core module -->
-    <script src="app/core/core.module.js"></script>
+    <script src="/app/core/core.module.js"></script>
     <!--Services-->
-    <script src="app/components/results/results.service.js"></script>
-    <script src="app/components/profile/profile.service.js"></script>
+    <script src="/app/services/results.service.js"></script>
     <!-- directives -->
-    <script src="app/directives/navbar/navbar.controller.js"></script>
-    <script src="app/directives/navbar/navbar.directive.js"></script>
+    <script src="/app/directives/navbar/navbar.controller.js"></script>
+    <script src="/app/directives/navbar/navbar.directive.js"></script>
     <!-- controllers -->
-    <script src="app/components/home/home.controller.js"></script>
-    <script src="app/components/profile/profile.controller.js"></script>
-    <script src="app/components/results/results.controller.js"></script>
-    <script src="app/components/login/login.controller.js"></script>
-    <script src="app/components/upload/upload.controller.js"></script>
-    <script src="app/components/editUser/editUser.controller.js"></script>
-    <script src="app/components/admin/main/admin.controller.js"></script>
-    <script src="app/components/admin/signup/signup.controller.js"></script>
+    <!--login-->
+    <script src="/app/login/login.module.js"></script>
+    <script src="/app/login/login.config.js"></script>
+    <script src="/app/login/login.controller.js"></script>
+    <!--home-->
+    <script src="/app/home/home.module.js"></script>
+    <script src="/app/home/home.config.js"></script>
+    <script src="/app/home/home.controller.js"></script>
+    <!--upload-->
+    <script src="/app/upload/upload.module.js"></script>
+    <script src="/app/upload/upload.config.js"></script>
+    <script src="/app/upload/upload.controller.js"></script>
+    <!--results-->
+    <script src="/app/results/results.module.js"></script>
+    <script src="/app/results/results.config.js"></script>
+    <script src="/app/results/results.controller.js"></script>
+    <!--profile-main-->
+    <script src="/app/profile/main/profile.module.js"></script>
+    <script src="/app/profile/main/profile.config.js"></script>
+    <script src="/app/profile/main/profile.controller.js"></script>
+    <!--profile-edit-->
+    <script src="/app/profile/edit/profile-edit.module.js"></script>
+    <script src="/app/profile/edit/profile-edit.config.js"></script>
+    <script src="/app/profile/edit/profile-edit.controller.js"></script>
+    <!--admin-main-->
+    <script src="/app/admin/main/admin.module.js"></script>
+    <script src="/app/admin/main/admin.config.js"></script>
+    <script src="/app/admin/main/admin.controller.js"></script>
+    <!--admin-signup-->
+    <script src="/app/admin/signup/admin-signup.module.js"></script>
+    <script src="/app/admin/signup/admin-signup.config.js"></script>
+    <script src="/app/admin/signup/admin-signup.controller.js"></script>
 
 
     <script>

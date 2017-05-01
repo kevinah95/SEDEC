@@ -44,10 +44,10 @@ SELECT a.analysisId,p.processName,a.sampleDescription,a.samplePicture, r.resultM
 CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `get_user_notifications` (IN `userIdp` INT)  NO SQL
 SELECT n.idNotification,n.idResult,n.notificationDatetime FROM notification n INNER JOIN analysisresult r ON n.idResult = r.analysisResultId INNER JOIN analysis a ON r.analysisId = a.analysisId INNER JOIN user u ON a.userId = u.userId WHERE a.userId = userIdp AND n.viewed = 0$$
 
-CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `get_user_processes` (IN `userIdp` INT)  NO SQL
+CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `processes_find_by_user_id` (IN `userIdp` INT)  NO SQL
 SELECT p.processId,p.processName,p.processDescription FROM process p INNER JOIN processbyuser pbu on pbu.processId = p.processId INNER JOIN user u ON pbu.userId = u.userId WHERE u.userId = userIdp$$
 
-CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `update_user_profile` (IN `userIdp` INT, IN `newMailp` VARCHAR(150), IN `newPasswordp` VARCHAR(150), IN `newNamep` VARCHAR(150), IN `newPicturep` LONGBLOB)  NO SQL
+CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `user_update_profile` (IN `userIdp` INT, IN `newMailp` VARCHAR(150), IN `newPasswordp` VARCHAR(150), IN `newNamep` VARCHAR(150), IN `newPicturep` LONGBLOB)  NO SQL
 UPDATE user u SET u.userMail = COALESCE(newMailp,u.userMail), u.userPassword = COALESCE(newPasswordp,u.userPassword), u.userName = COALESCE(newNamep,u.userName), u.userProfilePicture = COALESCE(newPicturep,u.userProfilePicture) WHERE u.userId = userIdp$$
 
 CREATE DEFINER=`sedec_web_client`@`localhost` PROCEDURE `write_answer` (IN `resultContentp` VARCHAR(500), IN `analysisIdp` INT)  NO SQL

@@ -1,0 +1,29 @@
+### login
+GET http://localhost:8080/api/auth/login?email=kevinah95%40gmail.com&password=123 HTTP/1.1
+
+### admin users
+GET http://localhost:8080/api/v1/admin/users/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+
+### results_by_user_id
+ 
+GET http://localhost:8080/api/v1/results/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+
+### processes_by_user_id
+
+GET http://localhost:8080/api/v1/processes/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+
+### create analysis
+
+POST http://localhost:8080/api/v1/analysis/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+content-type: application/json
+
+{
+    "processId": 1,
+    "description": "Nuevo analisis",
+    "image": "blob"
+}
+

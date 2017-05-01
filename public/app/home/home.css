@@ -1,0 +1,33 @@
+a.sidebar-toggle.item {
+    cursor: pointer;
+}
+
+.full.height.image {
+    background-image: url("assets/img/IMG-20151013-WA0011.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+}
+
+.ui.main.container {
+    min-height: 100vh;
+}
+
+.ui.information.container h1,
+.ui.information.container p {
+    text-align: center;
+}
+
+.full.height {
+    bottom: 0;
+    position: relative;
+}
+
+.ui.information.container h1 {
+    color: white;
+    font-size: 5em;
+    font-style: bold;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}

@@ -1,5 +1,13 @@
 var express = require('express')
 
+var Busboy = require('busboy'), //
+    inspect = require('util').inspect;
+
+var multer = require('multer')
+var upload = multer({
+    dest: 'uploads/'
+})
+
 var jwt = require('../config/jwt');
 var bcrypt = require('bcryptjs');
 
@@ -35,7 +43,6 @@ module.exports = function(pool) {
                 };
                 console.log(rows[0]);
                 if (!rows[0].length) {
-                    //res.status(500).send({ message: 'Something was wrong!' });
                     res.status(500).send({ message: { email: 'Correo Incorrecto' } });
                     return next();
                 } else {

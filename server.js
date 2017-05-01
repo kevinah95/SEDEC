@@ -8,6 +8,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var cors = require('cors');
+const path = require('path');
 
 
 app.use(express.static('public')); // set the static files location /public/img will be /img for users
@@ -27,14 +28,36 @@ var jwtconfig = require('./config/jwt');
 
 var pool = mysql.createPool(dbconfig.connection);
 
+
+
 // routes ======================================================================
+/**
+ * Auth Middleware - This will check if the token is valid
+ * Only the requests that start with /api/v1/* will be checked for the token.
+ * Any URL's that do not follow the below pattern should be avoided unless you
+ * are sure that authentication is not needed.
+ */
+app.all('/api/v1/*', [require('./middlewares/isAuthenticated')]);
+
+
 app.use(require('./app')(pool));
+app.use('/', require('./routes'));
+
+
+app.use('/bower_components', express.static(__dirname + '/public/bower_components'));
+app.use('/app', express.static(__dirname + '/public/app'));
+app.use(express.static(__dirname + '/public'));
 
 
 // application -------------------------------------------------------------
-app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: __dirname + '/public' });
 });
+
+/*app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+});*/
 
 
 // listen (start app with node server.js) ======================================

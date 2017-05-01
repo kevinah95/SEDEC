@@ -18,15 +18,22 @@ module.exports = function(config) {
             './public/bower_components/semantic/dist/semantic.js',
             './public/bower_components/semantic/dist/semantic.css',
             './public/bower_components/angular/angular.js',
-            './public/bower_components/angular-route/angular-route.js',
+            './public/bower_components/angular-route/angular-route.min.js',
+            './public/bower_components/angular-ui-router/release/angular-ui-router.js',
             './public/bower_components/angular-mocks/angular-mocks.js', // loads our modules for tests
             './public/bower_components/angular-css/angular-css.js', // loads our modules for tests
             './public/bower_components/ng-flow/dist/ng-flow-standalone.js', // loads our modules for tests
             './public/bower_components/satellizer/dist/satellizer.min.js', // loads our modules for tests
-            './public/app/app.module.js', // our angular app
-            './public/app/app.config.js', // our angular app
-            './public/app/components/**/*.js', // our Home Ctrl
-            './public/app/directives/**/*.js', // our Home Ctrl
+            './public/bower_components/angular-animate/angular-animate.js', // loads our modules for tests
+            './public/bower_components/angular-toastr/dist/angular-toastr.tpls.js', // loads our modules for tests
+            './public/app/app.module.js',
+            './public/app/app.config.js',
+            './public/app/**/*.module.js',
+            './public/app/**/**/*.module.js',
+            './public/app/**/*.js',
+
+            './public/test/template-controller.spec.js'
+            // './public/app/directives/**/*.js', // our Home Ctrl
         ],
 
 
