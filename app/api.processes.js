@@ -15,7 +15,7 @@ module.exports = function(pool) {
 
     router.post('/getProcesses', function(req, res, next) {
         pool.getConnection(function(err, connection) {
-            connection.query('CALL get_user_processes(?)', [req.body.Id], function(error, rows) {
+            connection.query('CALL processes_find_by_user_id(?)', [req.body.Id], function(error, rows) {
                 if (error) {
                     res.status(500).send({ message: error.message });
                     return next(error);
