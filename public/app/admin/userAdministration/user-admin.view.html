@@ -2,80 +2,102 @@
 <div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
     <div class="ui middle aligned center aligned grid">
         <div class="ui basic center aligned segment">
-        	<div class="ui two column grid">
-        		<div class="column">
-        			
-        		</div>
-        		<div class="column right aligned">
-        			<button class="ui labeled icon blue button">
-					  <i class="plus icon"></i>
-					  Registrar Usuario
-					</button>
-        		</div>
-        	</div>
+            <div class="ui two column grid">
+                <div class="column">
+                </div>
+                <div class="column right aligned">
+                    <button class="ui labeled icon blue button">
+                        <i class="plus icon"></i> Registrar Usuario
+                    </button>
+                </div>
+            </div>
             <table class="ui very basic collapsing celled table">
-			  <thead>
-			    <tr>
-				    <th>Usuario</th>
-				    <th>Organización</th>
-				    <th>Administrador</th>
-				    <th>Editar</th>
-				    <th>Desactivar</th>
-			  	</tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td>
-			        <h4 class="ui image header">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Organización</th>
+                        <th>Administrador</th>
+                        <th>Editar</th>
+                        <th>Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
 			          <img src="http://www.hexatar.com/gallery/thumb/20151017_m562186105f59d.png" class="ui mini rounded image">
 			          <div class="content">
 			            Jose Aguilar Quesada
+			            <div class="sub header">jmaq.cr@gmail.com</div>
 			        </div>
 			      </h4></td>
-			      <td class="center aligned">
-			        CORBANA
-			      </td>
-			      <td class="center aligned">
-			      	<i class="large green checkmark icon"></i>
-			      </td>
-			      <td class="center aligned">
-			      	<button class="ui icon yellow button">
-					  <i class="write icon"></i>
-					</button>
-			      </td>
-			      <td class="center aligned">
-			      	<button class="ui icon red button">
-					  <i class="remove icon"></i>
-					</button>
-			      </td>
-			    </tr>
-			    <tr>
-			      <td>
-			        <h4 class="ui image header">
+                        <td class="center aligned">
+                            CORBANA
+                        </td>
+                        <td class="center aligned">
+                            <i class="large green checkmark icon"></i>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon yellow button">
+                                <i class="write icon"></i>
+                            </button>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon red button" ng-click="showModal()">
+                                <i class="remove icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
 			          <img src="http://www.hexatar.com/gallery/thumb/160426_113912_mabd551a71f_avatar.png" class="ui mini rounded image">
 			          <div class="content">
 			            Jasson Moya Álvarez
+			            <div class="sub header">jasc991@gmail.com</div>
 			        </div>
 			      </h4></td>
-			      <td class="center aligned">
-			        CORBANA
-			      </td>
-			      <td class="center aligned">
-			      	<i class="large red remove icon"></i>
-			      </td>
-			      <td class="center aligned">
-			      	<button class="ui icon yellow button">
-					  <i class="write icon"></i>
-					</button>
-			      </td>
-			      <td class="center aligned">
-			      	<button class="ui icon red button">
-					  <i class="remove icon"></i>
-					</button>
-			      </td>
-			    </tr>
-			  </tbody>
-			</table>
+                        <td class="center aligned">
+                            CORBANA
+                        </td>
+                        <td class="center aligned">
+                            <i class="large red remove icon"></i>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon yellow button">
+                                <i class="write icon"></i>
+                            </button>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon red button">
+                                <i class="remove icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ui basic modal">
+        <i class="close icon"></i>
+        <div class="header">
+            ¡Atención!
+        </div>
+        <div class="content">
+            <div class="left">
+                Está a punto de eliminar un usuario del sistema SEDEC.
+            </div>
+            <div class="right">
+                Las muestras y resultados que este usuario ha generado se mantendrán en el sistema, sin embargo, el usuario no podrá volver a acceder a la plataforma.
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui red button">
+                Cancelar
+            </div>
+            <div class="ui green button">
+                Confirmar
+            </div>
         </div>
     </div>
 </div>

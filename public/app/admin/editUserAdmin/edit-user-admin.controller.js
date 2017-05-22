@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular
-        .module('admin.signup')
-        .controller('SignupController', SignupController);
+        .module('admin.edituseradmin')
+        .controller('EditUserAdminController', EditUserAdminController);
 
-    function SignupController($scope, $location) {
+    function EditUserAdminController($scope, $location) {
         var vm = this;
         /*vm.logout = logout;
 

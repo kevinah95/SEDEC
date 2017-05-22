@@ -15,5 +15,11 @@
             }
         };*/
 
+        $scope.showModal = function(){
+            $('.basic.modal')
+              .modal('show')
+            ;
+        }
+
     }
 })();
