@@ -4,13 +4,29 @@
         .module('sedecApp')
         .controller('NavbarController', NavbarController);
 
-    function NavbarController($scope, $location) {
+    function NavbarController($scope, $location, notificationsService, $auth, $rootScope, $state) {
         var navbar = this;
+        navbar.notificationsList = [];
+        navbar.isAdmin = false;
         navbar.home = home;
         navbar.profile = profile;
         navbar.results = results;
         navbar.upload = upload;
         navbar.admin = admin;
+        navbar.notifications = notifications;
+        navbar.clickNotification = clickNotification;
+        if ($auth.isAuthenticated() && $rootScope.currentUser) {
+            console.log($rootScope.currentUser.isAdmin);
+            navbar.isAdmin = $rootScope.currentUser.isAdmin;
+            /*API.getFeed().success(function(data) {
+                $scope.photos = data;
+            });*/
+            console.log($auth.isAuthenticated());
+            $scope.$$postDigest(function() {
+                console.log('$$postDigest executed. Digest completed');
+                activate();
+            });
+        }
 
         function home() {
             $location.path('/home');
@@ -47,68 +63,42 @@
             }
         };
 
+        function notifications() {
+
+        };
+
+        function clickNotification(obj) {
+            notificationsService.update(obj).then(function(data) {
+                    console.log(data)
+                    $state.go('results');
+                    activate();
+                    return data;
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                    return error;
+                });
+        };
+
+        function activate() {
+            return notificationsService.getAllByUser()
+                .then(function(data) {
+                    navbar.notificationsList = data;
+                    console.log(data)
+                    return navbar.notificationsList;
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                    return error;
+                });
+        };
+
 
         var muestra = 0;
         $(function() {
             $(document).ready(function() {
                 $('#notifications')
-                    .dropdown({
-                        action: 'select',
-                        onChange: function(value, text, $selectedItem) {
-                            // var html = '<div class="item"><div class="ui feed"><div class="event"><div class="content"><div class="summary"><a class="user">Muestra 546</a> ha sido analizada<div class="date">Hace 1 hora</div></div><div class="meta"> <a class = "like green" ><i class = "check icon"> < /i> Marcar como vista </a> </div> </div> </div> </div> </div>';
-                            // //console.log($selectedItem);
-                            // //$('#notificationsmenu').append('<div class="item" data-value="' + 2 + '">' + "Hola" + '</div>');
-                            // $('#notificationsmenu').append(html);
-                            // $('#notificationsmenu').append(html);
-                            // /*var thisArtist = $('#notificationsmenu .item.user').dropdown('get value');
-                            // console.log(thisArtist);*/
-                            // $('#notificationsmenu').dropdown('refresh');
-                            // $('#notifications')
-                            //     .dropdown({
-                            //         action: 'select'
-                            //     });
-                            //console.log($("#notificationsmenu .menu > summary:has('user')"));
-                            //console.log($('*[data-value="value02"]'));
-                            //console.log($("#notificationsmenu").find('.summary').append('<a class="user" data-value="value02">Muestra 546</a> ha sido analizada'));
-
-                            var menu = '<div class="item">\
-                                            <div class="ui feed">\
-                                                <div class="event">\
-                                                    <div class="content">\
-                                                        <div class="summary">\
-                                                            <a class="user" data-value="value02">\
-                            Muestra ' + muestra++ + '\
-                            </a> ha sido analizada\
-                                                            <div class="date">\
-                                                                Hace 1 hora\
-                                                            </div>\
-                                                        </div>\
-                                                        <div class="meta">\
-                                                            <a class="like green">\
-                                                                <i class="check icon"></i> Marcar como vista\
-                                                            </a>\
-                                                        </div>\
-                                                    </div>\
-                                                </div>\
-                                            </div>\
-                                        </div>';
-                            var prueba01 = '.item.ui feed.event.content.summary'
-
-                            $("#notificationsmenu").append(prueba01);
-                            (function($) {
-                                $.fn.appendR = function(toAppend) {
-                                    var $toAppend = $(toAppend);
-                                    this.append($toAppend);
-                                    return $toAppend;
-                                };
-                            })(jQuery);
-
-
-                            var element1 = '<div> A div within a div </div>';
-                            var element2 = '<div> Another div within a div </div>';
-                            console.log($('<div/>').addClass("item"));
-                        }
-                    });
+                    .dropdown({ action: 'hide' });
 
                 //         }
                 //     });

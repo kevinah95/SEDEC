@@ -23,7 +23,6 @@ module.exports = function(pool) {
                     return next(error);
                 };
                 if (!rows[0].length) {
-                    console.log(rows);
                     res.status(500).send({ message: 'Something was wrong!' });
                 } else {
                     res.send(rows[0]);

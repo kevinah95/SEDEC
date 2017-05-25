@@ -9,6 +9,7 @@ var adminUsers = require('./api.admin.users');
 var results = require('./api.results');
 var processes = require('./api.processes');
 var analysis = require('./api.analysis');
+var notifications = require('./api.notifications');
 
 /*
  * Routes that doesn't need authorization
@@ -39,5 +40,10 @@ router.get('/api/v1/processes', processes.getAllByUserId);
  * Analysis
  */
 router.post('/api/v1/analysis', upload.single(), analysis.create);
+/**
+ * Notifications
+ */
+router.get('/api/v1/notifications', notifications.getAllByUser);
+router.put('/api/v1/notifications/:id', notifications.update);
 
 module.exports = router;
