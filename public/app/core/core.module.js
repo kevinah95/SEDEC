@@ -6,10 +6,11 @@
          * Angular modules
          */
         'ngAnimate', 'ngRoute',
+        'ngCsv', 'ngSanitize',
         /*
          * 3rd Party modules
          */
-        'ui.router', 'angularCSS', 'flow', 'toastr', 'satellizer'
+        'ui.router', 'angularCSS', 'flow', 'toastr', 'satellizer', 'angular-table'
     ]);
 
 
