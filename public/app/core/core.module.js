@@ -6,6 +6,7 @@
          * Angular modules
          */
         'ngAnimate', 'ngRoute',
+        'ngCsv', 'ngSanitize',
         /*
          * 3rd Party modules
          */

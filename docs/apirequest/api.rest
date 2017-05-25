@@ -3,22 +3,22 @@ GET http://localhost:8080/api/auth/login?email=kevinah95%40gmail.com&password=12
 
 ### admin users
 GET http://localhost:8080/api/v1/admin/users/ HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTY4OTI1MjIsImlhdCI6MTQ5NTY4MjkyMiwic3ViIjoxfQ.6QUBog3ma_6_C8jqdJf5_mlvUpY9_Mgpo9CqeUPpWo8
 
 ### results_by_user_id
  
 GET http://localhost:8080/api/v1/results/ HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTY4OTI1MjIsImlhdCI6MTQ5NTY4MjkyMiwic3ViIjoxfQ.6QUBog3ma_6_C8jqdJf5_mlvUpY9_Mgpo9CqeUPpWo8
 
 ### processes_by_user_id
 
 GET http://localhost:8080/api/v1/processes/ HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTY4OTI1MjIsImlhdCI6MTQ5NTY4MjkyMiwic3ViIjoxfQ.6QUBog3ma_6_C8jqdJf5_mlvUpY9_Mgpo9CqeUPpWo8
 
 ### create analysis
 
 POST http://localhost:8080/api/v1/analysis/ HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTQyNzQxOTYsImlhdCI6MTQ5MzA2NDU5Niwic3ViIjoxfQ.PkKmaNiwo7INaeteyoG8Nng4W9QXpy60CKoqHDIOiUQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTY4OTI1MjIsImlhdCI6MTQ5NTY4MjkyMiwic3ViIjoxfQ.6QUBog3ma_6_C8jqdJf5_mlvUpY9_Mgpo9CqeUPpWo8
 content-type: application/json
 
 {
@@ -27,3 +27,6 @@ content-type: application/json
     "image": "blob"
 }
 
+### get all results
+GET http://localhost:8080/api/v1/admin/results/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTY4OTI1MjIsImlhdCI6MTQ5NTY4MjkyMiwic3ViIjoxfQ.6QUBog3ma_6_C8jqdJf5_mlvUpY9_Mgpo9CqeUPpWo8
