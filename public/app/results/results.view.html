@@ -1,19 +1,21 @@
 <div navbar-directive></div>
-<div class="ui attached very padded container segment" style="background-color: #D9D9D9;min-height: 100%;">
-    <div class="ui container">
-        <div class="ui stackable three column grid">
-            <div class="column" ng-repeat="result in vm.results">
-                <div class="ui card">
-                    <div class="image">
-                        <img src={{result.samplePicture}}>
-                    </div>
-                    <div class="content">
-                        <a class="header">Resultado de análisis {{result.analysisId}} </a>
-                        <div class="meta">
-                            <span class="date">{{result.notificationDatetime}}</span>
+<div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
+    <div class="ui middle aligned center aligned grid">
+        <div class="ui basic aligned segment">
+            <div class="ui stackable two column grid">
+                <div class="column" ng-repeat="result in vm.results">
+                    <div class="ui fluid card">
+                        <div class="ui centered medium image">
+                            <img src={{result.samplePicture}}>
                         </div>
-                        <div class="description">
-                            {{result.resultMessage}}
+                        <div class="content">
+                            <a class="header">Resultado de análisis {{result.analysisId}} </a>
+                            <div class="meta">
+                                <span class="date">{{result.notificationDatetime}}</span>
+                            </div>
+                            <div class="description">
+                                <p>{{result.resultMessage}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
