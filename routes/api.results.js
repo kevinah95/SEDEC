@@ -16,6 +16,19 @@ var results = {
                 res.send(rows[0]);
             }
         });
+    },
+    getAll: function(req, res, next) {
+        pool.query('CALL get_all_results()', [], function(error, rows) {
+            if (error) {
+                res.status(500).send({ message: error.message });
+                return next(error);
+            };
+            if (!rows[0].length) {
+                res.status(204).send();
+            } else {
+                res.send(rows[0]);
+            }
+        });
     }
 };
 

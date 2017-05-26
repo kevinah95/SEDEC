@@ -1,0 +1,48 @@
+<div navbar-directive></div>
+<div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
+    <div class="ui middle aligned center aligned grid">
+        <div style="height: 100%;overflow-x: scroll; overflow-y: hidden;">
+            <table class="ui very basic collapsing celled table table-striped" at-table at-paginated at-list="vm.results" at-config="vm.config">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td at-title="ID" at-sortable at-initial-sorting="asc" at-attribute="analysisId">
+                            <p>{{item.analysisId}}</p>
+                        </td>
+                        <td at-title="Proceso">
+                            <p>{{item.processName}}</p>
+                        </td>
+                        <td at-title="Muestra">
+                            <p>{{item.sampleDescription}}</p>
+                        </td>
+                        <td at-title="Imagen">
+                            <img class="ui mini image" ng-src="{{item.samplePicture}}">
+                        </td>
+                        <td at-title="Resultado">
+                            <p>{{item.resultMessage}}</p>
+                        </td>
+                        <td at-title="Notificado">
+                            <p>{{item.notificationDatetime}}</p>
+                        </td>
+                        <td at-title="Organización">
+                            <p>{{item.organizationName}}</p>
+                        </td>
+                        <td at-title="Usuario">
+                            <p>{{item.userName}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui right floated pagination menu">
+            <at-pagination at-list="vm.results" at-config="vm.config"></at-pagination>
+        </div>
+        <div class="ui center aligned">
+            <button class="ui labeled icon blue button" ng-csv="vm.results" filename="test.csv">
+			    <i class="download icon"></i>
+					  Export
+            </button>
+        </div>
+    </div>
+
+</div>

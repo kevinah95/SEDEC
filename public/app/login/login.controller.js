@@ -42,7 +42,7 @@
                     return settings;
                 },
                 onSuccess: function(response) {
-                    //console.log(response);
+                    console.log(response);
                     $auth.setToken(response.token);
                     $window.localStorage.currentUser = JSON.stringify(response.user);
                     $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);

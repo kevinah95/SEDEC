@@ -30,6 +30,7 @@ router.delete('/api/v1/admin/users/:id', adminUsers.delete);*/
 /**
  * Results
  */
+router.get('/api/v1/admin/results', results.getAll);
 router.get('/api/v1/results', results.getAllByUserId);
 /**
  * Processes
