@@ -1,81 +1,71 @@
 <div navbar-directive></div>
 <div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
-    <div class="ui basic left aligned segment">
+    <div class="ui basic left aligned segment" ng-init="getOrganizations()">
         <form class="ui form">
             <div class="field">
                 <div class="ui blue label">
                     <i class="user icon"></i> Nombre
                 </div>
-                <input type="text" name="name" placeholder="Nombre Apellido">
+                <br>
+                <br>
+                <input type="text" name="name" placeholder="{{result.userName}}" ng-model="result.userName">
             </div>
             <div class="field">
                 <div class="ui blue label">
                     <i class="mail icon"></i> Correo electrónico
                 </div>
-                <input type="email" name="mail" placeholder="usuario@dominio.tld">
+                <br>
+                <br>
+                <input type="email" name="email" placeholder="{{result.userMail}}" ng-model="result.userMail">
             </div>
             <div class="field">
                 <div class="ui blue label">
                     <i class="building icon"></i> Organización
                 </div>
-                <select class="ui search dropdown">
-                    <option value=1>CORBANA</option>
-                    <option value=2>Café Tarrazú</option>
+                <br>
+                <br>
+                <select class="ui search dropdown" ng-change="updateProcesses()" ng-model="result.organizationId">
+                    <option value={{organization}} ng-repeat="organization in organizations">{{organization.organizationName}}</option>
                 </select>
+            </div>
+            <div class="field">
+                <div class="ui blue label">
+                    <i class="lock icon"></i> Privilegios
+                </div>
+                <br>
+                <br>
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" name="admin" ng-model= "result.isAdmin" ng-true-value=1 ng-false-value=0>
+                    <label>Administrador</label>
+                </div>
             </div>
             <div class="field">
                 <div class="ui blue label">
                     <i class="lab icon"></i> Procesos
                 </div>
-                <div class="ui celled relaxed list">
-                    <div class="item">
-                        <div class="ui master checkbox">
-                            <input type="checkbox" name="fruits">
-                            <label>Todos</label>
-                        </div>
-                        <div class="list">
-                            <div class="item">
-                                <div class="ui child checkbox">
-                                    <input type="checkbox" name="apple">
-                                    <label>Sigatoka Negra</label>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="ui child checkbox">
-                                    <input type="checkbox" name="orange">
-                                    <label>Mal de Panamá</label>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="ui child checkbox">
-                                    <input type="checkbox" name="pear">
-                                    <label>Moko</label>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="ui child checkbox">
-                                    <input type="checkbox" name="pear">
-                                    <label>Nemátodos</label>
-                                </div>
-                            </div>
+                <br>
+                <br>
+                <div class="ui grid">
+                    <div class="four wide column" ng-repeat="process in processes">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" ng-model="process.SELECTED" ng-true-value=1 ng-false-value=0>
+                            <label>{{process.processName}}</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ui two column grid">
-        		<div class="column center aligned">
-        			<button class="ui labeled icon green button">
-					  <i class="plus icon"></i>
-					  Registrar Usuario
-					</button>
-        		</div>
-        		<div class="column center aligned">
-        			<button class="ui labeled icon red button">
-					  <i class="remove icon"></i>
-					  Cancelar
-					</button>
-        		</div>
-        	</div>
+                <div class="column center aligned">
+                    <button class="ui labeled icon green button" ng-click="submit()">
+                        <i class="plus icon"></i> Registrar Usuario
+                    </button>
+                </div>
+                <div class="column center aligned">
+                    <button class="ui labeled icon red button" ng-click="return()">
+                        <i class="remove icon"></i> Cancelar
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

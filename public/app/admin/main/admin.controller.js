@@ -9,7 +9,7 @@
         vm.users = users;
 
         function users() {
-            $location.path('/admin/signup');
+            $location.path('/admin/useradmin');
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
