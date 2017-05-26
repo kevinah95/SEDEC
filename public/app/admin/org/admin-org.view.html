@@ -1,6 +1,237 @@
 <div navbar-directive></div>
 <div class="ui attached very padded text container segment" style="background-color: #D9D9D9;min-height: 100%;">
-    <div class="ui middle aligned center aligned grid">
+    <div class="ui one column centered grid">
+        <div class="ui basic center aligned segment">
+            <div class="ui one column centered  grid">
+                <h3 class="ui centered header">Administración de Organizaciones</h3>
+            </div>
+            <br>
+            <br>
+            <div class="ui two column grid">
+                <div class="column">
 
+                </div>
+                <div class="column right aligned">
+                    <button class="ui labeled icon blue button" ng-click="vm.openModalAdd()">
+					  <i class="plus icon"></i>
+					  Registrar Organización
+					</button>
+                    <br>
+                    <br>
+                    <button class="ui labeled icon yellow button" ng-click="vm.openModalAddProcess()">
+					  <i class="plus icon"></i>
+					  Agregar Proceso
+					</button>
+                </div>
+            </div>
+            <br>
+            <table class="ui very basic collapsing celled table">
+                <thead>
+                    <tr>
+                        <th>Organización</th>
+                        <th>Encargado</th>
+                        <th>Editar Procesos</th>
+                        <th>Editar</th>
+                        <th>Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="org in vm.organizations">
+                        <td>
+                            <h4 class="ui header">
+                                <div class="content">
+                                    {{org.organizationName}}
+                                </div>
+                            </h4>
+                        </td>
+                        <td class="center aligned">
+                            {{org.organizationAgentName}}
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon green button" ng-click="vm.openModalEditProcess(org.organizationId)">
+                                <i class="write icon"></i>
+                            </button>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon yellow button" ng-click="vm.openModalEdit(org.organizationId, org.organizationAgentName, org.organizationAgentMail, org.organizationDescription, org.organizationName)">
+                                <i class="write icon"></i>
+                            </button>
+                        </td>
+                        <td class="center aligned">
+                            <button class="ui icon red button" ng-click="vm.openModalDelete(org.organizationId, org.organizationAgentName, org.organizationAgentMail, org.organizationDescription, org.organizationName)">
+                                <i class="remove icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!--MODALS-->
+
+<!--ADD PROCESS-->
+<div class="ui small add_process modal">
+    <div class="header">
+        Agregar Proceso
+    </div>
+    <div class="ui basic segment">
+        <div class="ui one column grid">
+            <div class="column">
+                <form class="ui add_process form">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="name" placeholder="Nombre del proceso">
+                    </div>
+                    <div class="field">
+                        <label>Descripción</label>
+                        <textarea name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="vm.confirmAddProcess()">
+            Confirmar Cambios
+        </div>
+    </div>
+</div>
+
+<!--ADD MODAL-->
+<div class="ui small add modal">
+    <div class="header">
+        Registrar Organización
+    </div>
+    <div class="ui basic segment">
+        <div class="ui one column grid">
+            <div class="column">
+                <form class="ui add form">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="name" placeholder="Nombre de la organización">
+                    </div>
+                    <div class="field">
+                        <label>Encargado</label>
+                        <input type="text" name="agent" placeholder="Nombre del encargado">
+                    </div>
+                    <div class="field">
+                        <label>Correo</label>
+                        <input type="text" name="agentMail" placeholder="Correo del encargado">
+                    </div>
+                    <div class="field">
+                        <label>Descripción</label>
+                        <textarea name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="vm.confirmAdd()">
+            Confirmar Cambios
+        </div>
+    </div>
+</div>
+
+<!--EDIT MODAL-->
+<div class="ui small edit modal">
+    <div class="header">
+        Editar Organización
+    </div>
+    <div class="ui basic segment">
+        <div class="ui one column grid">
+            <div class="column">
+                <form class="ui edit form">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="name" value="{{vm.currentOrg.name}}">
+                    </div>
+                    <div class="field">
+                        <label>Encargado</label>
+                        <input type="text" name="agent" value="{{vm.currentOrg.agent}}">
+                    </div>
+                    <div class="field">
+                        <label>Correo</label>
+                        <input type="text" name="agentMail" value="{{vm.currentOrg.agentMail}}">
+                    </div>
+                    <div class="field">
+                        <label>Descripción</label>
+                        <textarea name="description">{{vm.currentOrg.description}}</textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="vm.confirmEdit()">
+            Confirmar Cambios
+        </div>
+    </div>
+</div>
+
+
+<!--PROCESS MODAL-->
+<div class="ui small process modal">
+    <div class="header">
+        Editar Procesos
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui header">Seleccione los procesos que se le permitirán a la organización</div>
+            <br>
+            <div class="ui two columns grid">
+                <div class="column" ng-repeat="process in vm.allProcesses">
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" name="public" ng-model="process.SELECTED" ng-true-value=1 ng-false-value=0 />
+                        <label>{{process.processName}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="vm.getProcessesSelected()">
+            Confirmar Cambios
+        </div>
+    </div>
+</div>
+
+
+<!--DELETE MODAL-->
+<div class="ui basic modal">
+    <i class="close icon"></i>
+    <div class="header">
+        ¡Atención!
+    </div>
+    <div class="content">
+        <div class="left">
+            Está a punto de eliminar una organización del sistema SEDEC.
+        </div>
+        <div class="right">
+            Todos los usuarios asociados a esta organización dejarán de estar activos. Los procesos que hayan hecho se mantendrán.
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="vm.deleteOrg()">
+            Confirmar
+        </div>
     </div>
 </div>

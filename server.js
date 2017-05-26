@@ -50,7 +50,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 // application -------------------------------------------------------------
-app.all('/*', function(req, res, next) {
+app.all('/*', function (req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
     res.sendFile('index.html', { root: __dirname + '/public' });
 });
@@ -61,9 +61,9 @@ app.all('/*', function(req, res, next) {
 
 
 // listen (start app with node server.js) ======================================
-var server = app.listen(8080, function() {
+var server = app.listen(8080, function () {
     //var host = server.address().address
     var port = server.address().port;
-    console.log("Example app listening at http://localhost:%s", port)
+    console.log("Running SEDEC at http://localhost:%s", port)
 
 });
