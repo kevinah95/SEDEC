@@ -53,6 +53,7 @@
     <script src="/app/services/results.service.js"></script>
     <script src="/app/services/admin.users.service.js"></script>
     <script src="/app/services/admin.org.service.js"></script>
+    <script src="/app/services/notifications.service.js"></script>
     <!-- directives -->
     <script src="/app/directives/navbar/navbar.controller.js"></script>
     <script src="/app/directives/navbar/navbar.directive.js"></script>
@@ -109,7 +110,7 @@
 
 
     <script>
-        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
             options.async = true;
         });
     </script>

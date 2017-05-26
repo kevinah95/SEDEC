@@ -11,6 +11,7 @@ var processes = require('./api.processes');
 var analysis = require('./api.analysis');
 var useradministration = require('./api.useradministration');
 var adminOrg = require('./api.admin.org');
+var notifications = require('./api.notifications');
 
 /*
  * Routes that doesn't need authorization
@@ -52,19 +53,24 @@ router.get('/api/v1/processes', processes.getAllByUserId);
  * Analysis
  */
 router.post('/api/v1/analysis', upload.single(), analysis.create);
+/**
+ * Notifications
+ */
+router.get('/api/v1/notifications', notifications.getAllByUser);
+router.put('/api/v1/notifications/:id', notifications.update);
 
 
-router.get('/api/v1/admin/users/getAllUsers',useradministration.getAllUsers);
+router.get('/api/v1/admin/users/getAllUsers', useradministration.getAllUsers);
 
-router.post('/api/v1/admin/users/disableUser',useradministration.disableUser);
+router.post('/api/v1/admin/users/disableUser', useradministration.disableUser);
 
-router.get('/api/v1/admin/users/getOrganizations',useradministration.getOrganizations);
+router.get('/api/v1/admin/users/getOrganizations', useradministration.getOrganizations);
 
-router.post('/api/v1/admin/users/getOrganizationProcesses',useradministration.getOrganizationProcesses);
+router.post('/api/v1/admin/users/getOrganizationProcesses', useradministration.getOrganizationProcesses);
 
-router.post('/api/v1/admin/users/createUser',useradministration.createUser);
+router.post('/api/v1/admin/users/createUser', useradministration.createUser);
 
-router.put('/api/v1/admin/users/updateUser',useradministration.updateUser);
+router.put('/api/v1/admin/users/updateUser', useradministration.updateUser);
 
 
 

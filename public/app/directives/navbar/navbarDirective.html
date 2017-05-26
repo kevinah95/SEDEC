@@ -6,7 +6,7 @@
     <a class="item " href="" ng-click="navbar.home()">Inicio</a>
     <a class="item " href="" ng-click="navbar.upload()">Procesar</a>
     <a class="item " href="" ng-click="navbar.results()">Resultados</a>
-    <a class="item " href="" ng-click="navbar.admin()">Administración</a>
+    <a class="item " href="" ng-show="navbar.isAdmin" ng-click="navbar.admin()">Administración</a>
     <div class="right menu">
         <!--<a class="browse item" id="notifications">Notificaciones<i class="dropdown icon"></i></a>
         <div class="ui flowing popup bottom right transition hidden" style="background-color: #D9D9D9">
@@ -38,20 +38,20 @@
             <i class="dropdown icon"></i>
             <div class="menu" id="notificationsmenu">
                 <div class="scrolling menu" style="background-color: #D9D9D9">
-                    <div class="item">
+                    <div class="item" ng-repeat="notification in navbar.notificationsList">
                         <div class="ui feed">
                             <div class="event">
                                 <div class="content">
                                     <div class="summary">
                                         <a class="user" data-value="value02">
-          Muestra 546
+          Muestra {{notification.idNotification}}
         </a> ha sido analizada
                                         <div class="date">
-                                            Hace 1 hora
+                                            {{notification.notificationDatetime}}
                                         </div>
                                     </div>
                                     <div class="meta">
-                                        <a class="like green">
+                                        <a class="like green" ng-click="navbar.clickNotification(notification.idNotification)">
                                             <i class="check icon"></i> Marcar como vista
                                         </a>
                                     </div>
