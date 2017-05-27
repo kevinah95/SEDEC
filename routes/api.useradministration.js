@@ -66,11 +66,15 @@ var adminusers = {
                     res.status(500).send({ message: error.message });
                     return next(error);
                 };
-                res.json({ message: 'User updated!' });
+                if (rows.affectedRows > 0) {
+                    res.json({ message: 'Successfully updated' });
+                } else {
+                    res.status(404).send({ message: "User Not found." });
+                }
             });
     },
 
-    removeUserProcesses : function(req, res, next) {
+    removeUserProcesses: function(req, res, next) {
         pool.query({
                 sql: 'CALL remove_user_processes(?)'
             }, [
@@ -127,21 +131,6 @@ var adminusers = {
                 res.status(204).send();
             } else {
                 res.send(rows[0]);
-            }
-        });
-    },
-
-    updateUser: function(req, res, next) {
-        console.log(req.body);
-        pool.query('CALL admin_update_user(?,?,?,?,?)', [req.body.userMail,req.body.userName, req.body.isAdmin, req.body.organizationId, req.body.userId], function(error, rows) {
-            if (error) {
-                res.status(500).send({ message: error.message });
-                return next(error);
-            };
-            if (rows.affectedRows > 0) {
-                res.json({ message: 'Successfully deleted' });
-            } else {
-                res.status(404).send({ message: "User Not found." });
             }
         });
     }

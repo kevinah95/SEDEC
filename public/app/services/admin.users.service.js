@@ -31,8 +31,8 @@
 
         }
 
-        function disableUser(obj){
-            return $http.post('/api/v1/admin/users/disableUser',obj)
+        function disableUser(obj) {
+            return $http.post('/api/v1/admin/users/disableUser', obj)
                 .then(getResultsComplete)
                 .catch(getResultsFailed);
 
@@ -46,13 +46,14 @@
             }
         }
 
-        function getOrganizations(){
+        function getOrganizations() {
             return $http.get('/api/v1/admin/users/getOrganizations')
                 .then(getResultsComplete)
                 .catch(getResultsFailed);
 
             function getResultsComplete(res, status, headers, config) {
-                return res.data;}
+                return res.data;
+            }
 
             function getResultsFailed(e) {
                 //console.error(e.data.message);
@@ -60,8 +61,8 @@
             }
         }
 
-        function getOrganizationProcesses(obj){
-            return $http.post('/api/v1/admin/users/getOrganizationProcesses',obj)
+        function getOrganizationProcesses(obj) {
+            return $http.post('/api/v1/admin/users/getOrganizationProcesses', obj)
                 .then(getResultsComplete)
                 .catch(getResultsFailed);
 
@@ -75,8 +76,8 @@
             }
         }
 
-        function createUser(obj){
-            return $http.post('/api/v1/admin/users/createUser',obj)
+        function createUser(obj) {
+            return $http.post('/api/v1/admin/users/createUser', obj)
                 .then(getResultsComplete)
                 .catch(getResultsFailed);
 
@@ -89,8 +90,10 @@
                 return $q.reject(e);
             }
         }
-        function updateUser(obj){
-            return $http.put('/api/v1/admin/users/updateUser',obj)
+
+        function updateUser(obj) {
+
+            return $http.put('/api/v1/admin/users/updateUser', obj)
                 .then(getResultsComplete)
                 .catch(getResultsFailed);
 
