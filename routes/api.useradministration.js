@@ -34,21 +34,40 @@ var adminusers = {
 
     createUser: function(req, res, next) {
         pool.query({
-                sql: 'CALL create_user(?,?,?,?,?)'
+                sql: 'CALL create_user(?,?,?,?,?,?)'
             }, [
                 req.body.userMail,
                 req.body.userPassword,
                 req.body.userName,
                 req.body.userProfilePicture,
-                req.body.organizationId
+                req.body.organizationId,
+                req.body.isAdmin
             ],
             function(error, rows) {
                 if (error) {
                     res.status(500).send({ message: error.message });
                     return next(error);
                 };
-                res.json({ message: 'User created!' });
+                if (!rows[0].length) {
+                    res.status(204).send();
+                } else {
+                    res.send(rows[0]);
+                }
             });
+    },
+
+    associateUserProcess: function(req, res, next) {
+        pool.query('CALL user_process_association(?,?)', [req.body.userId,req.body.processId], function(error, rows) {
+            if (error) {
+                res.status(500).send({ message: error.message });
+                return next(error);
+            };
+            if (rows.affectedRows > 0) {
+                res.json({ message: 'Process assocaited with user' });
+            } else {
+                res.status(404).send({ message: "Not found." });
+            }
+        });
     },
 
     updateUser: function(req, res, next) {
@@ -86,22 +105,6 @@ var adminusers = {
                     return next(error);
                 };
                 res.json({ message: 'Processes deleted!' });
-            });
-    },
-
-    updateProcessAssociation: function(req, res, next) {
-        pool.query({
-                sql: 'CALL user_process_association(?,?)'
-            }, [
-                req.body.userId,
-                req.body.processId
-            ],
-            function(error, rows) {
-                if (error) {
-                    res.status(500).send({ message: error.message });
-                    return next(error);
-                };
-                res.json({ message: 'User associated with process!' });
             });
     },
 

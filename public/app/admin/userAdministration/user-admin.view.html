@@ -45,13 +45,38 @@
                             </button>
                         </td>
                         <td class="center aligned">
-                            <button class="ui icon red button" ng-click="disableUser($index)">
+                            <button class="ui icon red button" ng-click="showConfirmation($index)">
                                 <i class="remove icon"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+
+<!--DELETE MODAL-->
+<div class="ui basic modal">
+    <i class="close icon"></i>
+    <div class="header">
+        ¡Atención!
+    </div>
+    <div class="content">
+        <div class="left">
+            Está a punto de eliminar un usuario del sistema SEDEC.
+        </div>
+        <div class="right">
+            Todos los análisis y resultados asociados a esta organización permanecerán en el sistema. El usuario perderá el acceso a la aplicación.
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red deny button" ng-click="hideConfirmation()">
+            Cancelar
+        </div>
+        <div class="ui green button" ng-click="disableUser()">
+            Confirmar
         </div>
     </div>
 </div>

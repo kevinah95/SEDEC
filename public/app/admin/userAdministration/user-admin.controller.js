@@ -44,7 +44,8 @@
             }
         }
 
-        $scope.disableUser = function(index){
+        $scope.disableUser = function(){
+            var index =  $scope.currentUserDelete;
             adminUsersService.disableUser($scope.users[index])
                 .then(function(data){
                     console.log(data);
@@ -53,8 +54,18 @@
                     console.log(error);
                 })
 
+            $scope.hideConfirmation();
             $scope.init();
             
+        }
+
+        $scope.showConfirmation = function(index){
+            $scope.currentUserDelete = index;
+            $('.basic.modal').modal('show');
+        }
+
+        $scope.hideConfirmation = function(){
+            $('.basic.modal').modal('hide');
         }
 
         $scope.editUser = function(index){

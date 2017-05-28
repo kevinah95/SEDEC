@@ -70,11 +70,10 @@ router.post('/api/v1/admin/users/getOrganizationProcesses', useradministration.g
 
 router.post('/api/v1/admin/users/createUser', useradministration.createUser);
 
-router.put('/api/v1/admin/users/updateUser', useradministration.updateUser);
+router.post('/api/v1/admin/users/updateUser', useradministration.updateUser);
 
+router.post('/api/v1/admin/users/associateUserProcess', useradministration.associateUserProcess);
 
-
-
-
+router.post('/api/v1/admin/users/removeUserProcesses', useradministration.removeUserProcesses);
 
 module.exports = router;
