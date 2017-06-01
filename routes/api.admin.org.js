@@ -105,6 +105,33 @@ var organization = {
                 };
                 res.send(rows[0]);
             });
+    },
+    deleteProcessesOrg: function (req, res, next) {
+        pool.query('CALL remove_org_processes(?)',
+            [
+                req.body.id
+            ],
+            function (error, rows) {
+                if (error) {
+                    res.status(500).send({ message: error.message });
+                    return next(error);
+                };
+                res.send(rows[0]);
+            });
+    },
+    associateOrgProcess: function (req, res, next) {
+        pool.query('CALL organization_process_association(?,?)',
+            [
+                req.body.orgID,
+                req.body.processID
+            ],
+            function (error, rows) {
+                if (error) {
+                    res.status(500).send({ message: error.message });
+                    return next(error);
+                };
+                res.send(rows[0]);
+            });
     }
 };
 

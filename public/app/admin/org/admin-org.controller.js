@@ -18,6 +18,8 @@
         vm.getProcessesSelected = getProcessesSelected;
         vm.openModalAddProcess = openModalAddProcess;
         vm.confirmAddProcess = confirmAddProcess;
+        vm.deleteAllProcessesOrg = deleteAllProcessesOrg;
+        vm.addProcessesOrg = addProcessesOrg;
         vm.init = init;
 
         vm.organizations = {};
@@ -169,6 +171,41 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+        }
+
+        function deleteAllProcessesOrg() {
+            adminOrgService.deleteOrganizationProcesses(vm.currentOrg.id)
+                .then(function (data) {
+                    if (vm.processesSelected.length > 0) {
+                        vm.addProcessesOrg(vm.processesSelected, 0, vm.currentOrg.id);
+                    }
+                    else {
+                        $('.add_process.modal').modal('hide');
+                        location.reload();
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+
+        function addProcessesOrg(processesSelected, cont, orgID) {
+            if (cont < processesSelected.length) {
+                vm.sendingProcess = {
+                    "orgID": orgID,
+                    "processID": processesSelected[cont]
+                };
+                adminOrgService.associateOrgProcess(vm.sendingProcess)
+                    .then(function (data) {
+                        vm.addProcessesOrg(processesSelected, cont + 1, orgID);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            } else {
+                $('.add_process.modal').modal('hide');
+                location.reload();
+            }
         }
 
         function openModalAddProcess() {

@@ -194,7 +194,8 @@
             <div class="ui two columns grid">
                 <div class="column" ng-repeat="process in vm.allProcesses">
                     <div class="ui toggle checkbox">
-                        <input type="checkbox" name="public" ng-model="process.SELECTED" ng-true-value=1 ng-false-value=0 />
+                        <input type="checkbox" name="public" ng-model="process.SELECTED" ng-true-value=1 ng-false-value=0 ng-click="vm.getProcessesSelected()"
+                        />
                         <label>{{process.processName}}</label>
                     </div>
                 </div>
@@ -205,7 +206,7 @@
         <div class="ui red deny button">
             Cancelar
         </div>
-        <div class="ui green button" ng-click="vm.getProcessesSelected()">
+        <div class="ui green button" ng-click="vm.deleteAllProcessesOrg()">
             Confirmar Cambios
         </div>
     </div>

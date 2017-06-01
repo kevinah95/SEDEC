@@ -36,6 +36,8 @@ router.put('/api/v1/admin/org/organizationUpdate', adminOrg.organizationUpdate);
 router.put('/api/v1/admin/org/deleteOrganization', adminOrg.deleteOrganization);
 router.put('/api/v1/admin/org/createOrganization', adminOrg.createOrganization);
 router.put('/api/v1/admin/org/createProcess', adminOrg.createProcess);
+router.put('/api/v1/admin/org/deleteProcessesOrg', adminOrg.deleteProcessesOrg);
+router.put('/api/v1/admin/org/associateOrgProcess', adminOrg.associateOrgProcess);
 
 /*
  * Routes that can be accessed only by autheticated users

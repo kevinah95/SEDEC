@@ -12,7 +12,9 @@
             organizationUpdate: organizationUpdate,
             organizationDelete: organizationDelete,
             organizationCreate: organizationCreate,
-            createProcess: createProcess
+            createProcess: createProcess,
+            deleteOrganizationProcesses: deleteOrganizationProcesses,
+            associateOrgProcess: associateOrgProcess
         };
         return service;
 
@@ -110,6 +112,37 @@
 
         function createProcess(dataStructure) {
             return $http.put('/api/v1/admin/org/createProcess', dataStructure)
+                .then(createProcessComplete)
+                .catch(createProcessFailed);
+
+            function createProcessComplete(res, status, headers, config) {
+                return res.data;
+            }
+
+            function createProcessFailed(e) {
+                return $q.reject(e);
+            }
+        }
+
+        function deleteOrganizationProcesses(orgId) {
+            var dataStructure = {
+                "id": orgId
+            }
+            return $http.put('/api/v1/admin/org/deleteProcessesOrg', dataStructure)
+                .then(createProcessComplete)
+                .catch(createProcessFailed);
+
+            function createProcessComplete(res, status, headers, config) {
+                return res.data;
+            }
+
+            function createProcessFailed(e) {
+                return $q.reject(e);
+            }
+        }
+
+        function associateOrgProcess(dataStructure) {
+            return $http.put('/api/v1/admin/org/associateOrgProcess', dataStructure)
                 .then(createProcessComplete)
                 .catch(createProcessFailed);
 
