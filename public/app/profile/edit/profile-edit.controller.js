@@ -4,7 +4,7 @@
         .module('profile.edit')
         .controller('EditUserController', EditUserController);
 
-    function EditUserController($scope, $location) {
+    function EditUserController($scope, $location, $rootScope) {
 
         var vm = this;
         vm.imageStrings = [];
@@ -14,10 +14,12 @@
         vm.closeModal = closeModal;
         vm.processFiles = processFiles;
         vm.cancelEdit = cancelEdit;
+        vm.user = {};
 
         var modal = document.getElementById('myModal');
 
         $scope.$$postDigest(function() {
+            vm.user = $rootScope.currentUser;
             console.log('EditUser');
         });
 
@@ -47,9 +49,15 @@
                 modal.style.display = "block";
                 var form = $('.form');
                 var allFields = form.form('get values');
-                var uploadedImage = vm.imageStrings[0];
+                var uploadedImage = ""
+                if (vm.imageStrings[0] == null){
+                    uploadedImage = vm.user.userProfilePicture;
+                }
+                else{
+                    uploadedImage = vm.imageStrings[0];
+                }
                 vm.editionDataArray = {
-                    "userId": 1, //Should be sessionStorage
+                    "userId": $rootScope.currentUser.userId,
                     "mail": allFields.mail,
                     "password": allFields.pass,
                     "name": allFields.name,
@@ -93,14 +101,11 @@
         $('.ui.form')
             .form({
                 fields: {
-                    image_uploaded: {
-                        rules: [{ type: 'empty', prompt: 'Debe seleccionar una imagen' }]
-                    },
                     mail: {
                         rules: [{ type: 'email', prompt: 'Ingrese un correo válida' }]
                     },
                     pass: {
-                        rules: [{ type: 'empty', prompt: 'Ingrese una contraseña' }]
+                        rules: [{ type: 'empty', prompt: 'Debe ingresar su contraseña o una nueva' }]
                     },
                     name: {
                         rules: [{ type: 'empty', prompt: 'Ingrese un nombre' }]

@@ -4,9 +4,9 @@
         .module('app.upload')
         .controller('UploadController', UploadController);
 
-    function UploadController($scope, $http, $timeout, $location) {
+    function UploadController($scope, $http, $timeout, $location, $rootScope) {
         var modal = document.getElementById('myModal');
-        var info = { "Id": 1 }; //This line must be changed when we have SessionStorage
+        var info = { "Id": $rootScope.currentUser.userId}; //This line must be changed when we have SessionStorage
         var vm = this;
         vm.errorUploading = false;
         vm.diseaseID = -1;
@@ -62,7 +62,7 @@
                 var allFields = form.form('get values');
                 var uploadedImage = vm.imageStrings[0];
                 vm.analysisArray = {
-                    "userId": 1, //Should be sessionStorage
+                    "userId": $rootScope.currentUser.userId, //Should be sessionStorage
                     "processId": vm.diseaseID,
                     "description": allFields.description,
                     "image": uploadedImage

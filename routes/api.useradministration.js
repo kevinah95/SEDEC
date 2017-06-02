@@ -1,6 +1,8 @@
 var mysql = require('mysql');
 
 var pool = mysql.createPool(require('../config/database').connection);
+var jwt = require('../config/jwt');
+var bcrypt = require('bcryptjs');
 
 var adminusers = {
 
@@ -33,31 +35,41 @@ var adminusers = {
     },
 
     createUser: function(req, res, next) {
-        pool.query({
-                sql: 'CALL create_user(?,?,?,?,?,?)'
-            }, [
-                req.body.userMail,
-                req.body.userPassword,
-                req.body.userName,
-                req.body.userProfilePicture,
-                req.body.organizationId,
-                req.body.isAdmin
-            ],
-            function(error, rows) {
-                if (error) {
-                    res.status(500).send({ message: error.message });
-                    return next(error);
-                };
-                if (!rows[0].length) {
-                    res.status(204).send();
-                } else {
-                    res.send(rows[0]);
-                }
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.body.userPassword, salt, function(err, hash) {
+                req.body.userPassword = hash;
+                console.log(req.body);
+                pool.query({
+                        sql: 'CALL create_user(?,?,?,?,?,?)'
+                    }, [
+                        req.body.userMail,
+                        req.body.userPassword,
+                        req.body.userName,
+                        req.body.userProfilePicture,
+                        req.body.organizationId,
+                        req.body.admin
+                    ],
+                    function(error, rows) {
+                        if (error) {
+                            res.status(500).send({ message: error.message });
+                            return next(error);
+                        };
+                        if (!rows[0].length) {
+                            res.status(204).send();
+                        } else {
+                            res.send(rows[0]);
+                        }
+                    });
+
+
             });
+        });
+
+
     },
 
     associateUserProcess: function(req, res, next) {
-        pool.query('CALL user_process_association(?,?)', [req.body.userId,req.body.processId], function(error, rows) {
+        pool.query('CALL user_process_association(?,?)', [req.body.userId, req.body.processId], function(error, rows) {
             if (error) {
                 res.status(500).send({ message: error.message });
                 return next(error);
