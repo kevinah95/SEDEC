@@ -90,10 +90,15 @@
 
         }
 
-
+        /**
+        * Agrega la relación del usuario con cada uno de los procesos habilitados
+        * @param {array of int} array Arreglo de identificadores de los procesos
+        * @param {int} cont Contador para la ejecución recursiva de la función
+        * @param {int} user Identificador del usuario en cuestión
+        * @returns data | error
+        */
         $scope.addProcesses = function(array, cont, user) {
             if (cont < array.length) {
-                //Agregar arreglo[cont] a los procesos
                 $scope.currentProcess = {};
                 $scope.currentProcess.userId = user;
                 $scope.currentProcess.processId = array[cont];

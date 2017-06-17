@@ -20,6 +20,11 @@
         }
 
 
+        /**
+        *Carga todos los resultados de análisis pertenecientes a un usuario
+        *@param {int} info Identificador de usuario del cuál se quieren obtener los resultados
+        *@returns {array of Results} data Arreglo con todos los resultados obtenidos de la consulta
+        */
 
         function activate(info) {
             return resultsService.getResults(info)
@@ -35,4 +40,6 @@
         };
 
     }
+
+    
 })();
